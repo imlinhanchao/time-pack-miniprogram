@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="userinfo">
+      <block>
+        <button class="btn">
+          拿个胶囊
+        </button>
+        <button class="btn">
+          开个胶囊
+        </button>
+      </block>
+    </view>
+  </view>
+</scroll-view>
