@@ -9,12 +9,17 @@ page {
   overflow-y: hidden;
 }
 
-.userinfo {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   color: #aaa;
-  width: 80%;
+  width: 100%;
+}
+
+.home {
+  margin-bottom: 100rpx;
 }
 
 .btn {
@@ -23,6 +28,37 @@ page {
   border: 8rpx solid rgb(24, 25, 31);
   border-radius: 90rpx;
   box-shadow: 0rpx 10rpx 0rpx 0rpx rgb(24, 25, 31);
-  background: rgb(255, 255, 255);
   margin: 80rpx auto;
+  &:active {
+    box-shadow: 0rpx 5rpx 0rpx 0rpx rgb(24, 25, 31);
+    position: relative;
+    top: 5rpx;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30rpx;
+  .logo-image {
+    width: 150rpx;
+    height: 150rpx;
+    margin-right: 20rpx;
+  }
+  text {
+    font-weight: bold;
+    font-size: 250%;
+    color:rgb(24, 25, 31)
+  }
+}
+
+.primary {
+  background-color: #2487ff;
+  color: #fff;
+}
+
+.default {
+  background-color: #d8d8da;
+  color: #000;
 }

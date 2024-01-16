@@ -1,14 +1,14 @@
 <!--index.wxml-->
-<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<navigation-bar title="时间胶囊" back="{{false}}" color="black" background="#FFF"></navigation-bar>
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
-    <view class="userinfo">
+    <view class="home">
       <block>
-        <button class="btn">
-          拿个胶囊
+        <button class="btn primary">
+          封装胶囊
         </button>
-        <button class="btn">
-          开个胶囊
+        <button class="btn default">
+          打开胶囊
         </button>
       </block>
     </view>
