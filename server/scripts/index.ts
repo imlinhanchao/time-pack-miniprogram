@@ -24,7 +24,7 @@ const db = {
   password: "",
   database: "app",
   dialect: "mysql",
-  prefix: "pwr_",
+  prefix: "time_",
   port: 3306,
   logging: false
 };
