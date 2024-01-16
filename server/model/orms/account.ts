@@ -1,6 +1,5 @@
 import * as db from "../db";
 import { prefix } from "../config.json";
-import { Model } from "sequelize";
 const orm = {
   username: {
     type: db.STRING(20),
