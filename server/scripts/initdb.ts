@@ -4,7 +4,7 @@ import readline from "readline";
 import model, { sync } from "../model";
 
 async function main () {
-  if (fs.existsSync(path.join(__dirname, "../server/model/config.json")))
+  if (fs.existsSync(path.join(__dirname, "../model/config.json")))
     return initDB();
   const rl: readline.Interface & {
     inputData?: (key: string, defaultVal?: string) => Promise<string>;

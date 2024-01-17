@@ -1,25 +1,17 @@
 import * as db from "../db";
 import { prefix } from "../config.json";
 const orm = {
-  username: {
-    type: db.STRING(20),
-    comment: "登录帐号"
+  openid: {
+    type: db.STRING(256),
+    comment: "小程序 OpenID"
   },
   nickname: {
     type: db.STRING(20),
     comment: "昵称"
   },
-  passwd: {
-    type: db.STRING(64),
-    comment: "密码"
-  },
   avatar: {
     type: db.STRING(200),
     comment: "头像"
-  },
-  roles: {
-    type: db.TEXT,
-    comment: "角色"
   },
   lastlogin: {
     type: db.INTEGER,

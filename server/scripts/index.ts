@@ -3,7 +3,6 @@ import path from "path";
 import readline from "readline";
 import { v4 as uuidv4 } from "uuid";
 import pkg from "../package.json";
-import { sync } from "../model";
 
 const config = {
   name: pkg.description || "",
@@ -89,14 +88,14 @@ export async function main() {
   db.password = await rl.inputData("Database Password", "");
 
   fs.writeFile(
-    path.join(__dirname, "../server/config.json"),
+    path.join(__dirname, "../config.json"),
     JSON.stringify(config, null, 4),
     err => {
       if (err) console.error(`Save website config failed: ${err.message}`);
       else {
         // Save DB Config
         fs.writeFile(
-          path.join(__dirname, "../server/model/config.json"),
+          path.join(__dirname, "../model/config.json"),
           JSON.stringify(db, null, 4),
           err => {
             if (err) console.error(`Save db config failed: ${err.message}`);
@@ -112,6 +111,7 @@ export async function main() {
 export function initDB() {
   (async () => {
     try {
+      const { sync } = await import("../model");
       await sync();
       console.info("Init all model finish.");
     } catch (err: any) {
