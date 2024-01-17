@@ -9,18 +9,20 @@
       "request": "launch",
       "name": "Launch",
       "runtimeArgs": [
-          "--nolazy",
-          "-r",
-          "tsconfig-paths/register",
-          "-r",
-          "ts-node/register"
+        "--nolazy",
+        "-r",
+        "tsconfig-paths/register",
+        "-r",
+        "ts-node/register"
       ],
       "args": [
-          "${workspaceRoot}/index.ts"
+        "${workspaceRoot}/index.ts"
       ],
-      "env": { "TS_NODE_PROJECT": "tsconfig.json" },
+      "env": {
+        "TS_NODE_PROJECT": "tsconfig.json"
+      },
       "sourceMaps": true,
       "cwd": "${workspaceRoot}"
-  }
+    }
   ]
 }

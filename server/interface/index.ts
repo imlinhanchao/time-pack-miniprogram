@@ -1,13 +1,16 @@
 import { glob } from "glob";
 import path from "path";
-const files = glob.sync(path.join('*.ts').replace(/\\/g, '/'));
+const loadFilter = path.relative(process.cwd(), path.resolve(__dirname, '*.ts')).replace(/\\/g, '/');
+const files = glob.sync(loadFilter);
 const apps: Record<string, any> = {};
 
-for (const f of files) {
-  if (f == 'index.ts') continue;
-  console.info(`import model from file ${f}...`);
-  const name = f.substring(0, f.length - 3);
-  apps[name] = require(__dirname + "/" + f);
-}
+files.forEach(async (file) => {
+  if (file.endsWith('index.ts')) return;
+  const name = path.basename(file.replace(/\.ts$/, ''));
+  file = './' + name;
+  const app = await import(file);
+  if (!app) return;
+  apps[name] = app;
+});
 
 export default apps;

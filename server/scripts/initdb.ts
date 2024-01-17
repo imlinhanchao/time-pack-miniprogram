@@ -34,7 +34,7 @@ async function main () {
       user: "",
       password: ""
     },
-    require("../server/config").db
+    require("../config").db
   );
 
   config.host = await rl.inputData("Host", "localhost");
@@ -45,7 +45,7 @@ async function main () {
     (await rl.inputData("Log SQL Execute", config.logging ? "Y" : "N")) == "Y";
 
   fs.writeFile(
-    path.join(__dirname, "../server/model/config.json"),
+    path.join(__dirname, "../model/config.json"),
     JSON.stringify(config, null, 4),
     err => {
       if (err) console.error(`[Error] create db config failed: ${err.message}`);
