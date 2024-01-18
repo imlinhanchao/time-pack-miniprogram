@@ -1,4 +1,4 @@
-import { Dialect, INTEGER, Sequelize, UUID, UUIDV4 } from "sequelize";
+import { BIGINT, Dialect, INTEGER, Sequelize, UUID, UUIDV4 } from "sequelize";
 import config from "./config.json";
 const sequelize = new Sequelize(config.database, config.user, config.password, {
   host: config.host,
@@ -34,10 +34,10 @@ export function defineModel(name: string, attributes: any, defineAttr = {}) {
     }
   }
   attrs.create_time = {
-    type: INTEGER
+    type: BIGINT
   };
   attrs.update_time = {
-    type: INTEGER
+    type: BIGINT
   };
   return sequelize.define(
     name,
@@ -47,7 +47,7 @@ export function defineModel(name: string, attributes: any, defineAttr = {}) {
       timestamps: false,
       hooks: {
         beforeCreate: function (obj: any) {
-          const now = new Date().valueOf() / 1000;
+          const now = new Date().valueOf();
           if (obj.isNewRecord) {
             obj.create_time = obj.create_time || now;
             obj.update_time = obj.update_time || now;
@@ -56,7 +56,7 @@ export function defineModel(name: string, attributes: any, defineAttr = {}) {
           }
         },
         beforeBulkCreate: function (records: any) {
-          const now = new Date().valueOf() / 1000;
+          const now = new Date().valueOf();
           for (const i in records) {
             if (records[i].isNewRecord) {
               records[i].create_time = records[i].create_time || now;

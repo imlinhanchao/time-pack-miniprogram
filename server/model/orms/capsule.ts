@@ -2,7 +2,7 @@ import * as db from "../db";
 import { prefix } from "../config.json";
 const orm = {
   user: {
-    type: db.STRING(20),
+    type: db.STRING(256),
     comment: "所属用户"
   },
   title: {
@@ -23,11 +23,19 @@ const orm = {
   },
   status: {
     type: db.INTEGER,
-    comment: "状态，1：正常，2：已开启"
+    comment: "状态，1：已封存，2：已开启"
   },
   create_user: {
-    type: db.STRING(20),
+    type: db.STRING(256),
     comment: "创建用户"
+  },
+  create_nick: {
+    type: db.STRING(256),
+    comment: "创建用户昵称"
+  },
+  create_avatar: {
+    type: db.STRING(256),
+    comment: "创建用户昵称"
   },
 };
 export const table_name = prefix + "capsule";

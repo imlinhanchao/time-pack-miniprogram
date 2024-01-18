@@ -9,12 +9,16 @@ const orm = {
     type: db.STRING(20),
     comment: "昵称"
   },
+  session_key: {
+    type: db.STRING(256),
+    comment: "会话密钥"
+  },
   avatar: {
     type: db.STRING(200),
     comment: "头像"
   },
   lastlogin: {
-    type: db.INTEGER,
+    type: db.BIGINT,
     comment: "最后登录时间"
   }
 };

@@ -10,6 +10,10 @@ const config = {
   accessSecret: "",
   refreshSecret: "",
   salt: "",
+  wx: {
+    appid: "",
+    secret: ""
+  },
   file: {
     upload: "/public/upload/",
     fileurl: "/upload/",
@@ -76,6 +80,12 @@ export async function main() {
     "Max Size File Upload(MB)",
     config.file.maxSize.toString()
   ));
+
+  config.wx.appid = await rl.inputData("AppID", config.wx.appid);
+  config.wx.secret = await rl.inputData(
+    "AppSecret",
+    config.wx.secret
+  );
 
   db.port = parseInt(await rl.inputData("Database Port", db.port.toString()));
   db.database = await rl.inputData("Database Name", db.database);

@@ -2,10 +2,11 @@ import { Request } from 'express';
 import path from "path";
 import fs from "fs";
 import crypto from "crypto";
-import model from "../model";
+import model from "@/model";
 import App from "./app";
-import config from "../config.json";
+import config from "@/config.json";
 import jwt from "jsonwebtoken";
+import wxapi from "@/lib/wx";
 const Account = model.account;
 
 const __salt = config.salt;
@@ -28,15 +29,15 @@ export interface ILogin {
   username: string;
   passwd: string;
 }
+export interface ILoginWx {
+  code: string;
+}
 
 export interface IAccount {
-  username?: string;
+  openid?: string;
   nickname: string;
-  passwd?: string;
+  session_key?: string;
   avatar: string;
-  email?: string;
-  phone?: string;
-  roles: string;
   lastlogin: number;
 }
 
@@ -115,6 +116,48 @@ class AccountApp extends App {
     }
   }
 
+  async loginWx(data: ILoginWx) {
+    const keys = ["code"];
+
+    if (!App.haskeys(data, keys)) {
+      throw this.error.param;
+    }
+
+    data = App.filter(data, keys) as ILoginWx;
+
+    try {
+      const wx = await wxapi.login(data.code);
+      let account = await this.exist(wx.openid, true);
+      if (!account) {
+        account = await this.create({
+          openid: wx.openid,
+          session_key: wx.session_key,
+          nickname: "",
+          avatar: "",
+          lastlogin: new Date().valueOf()
+        }, true);
+      }
+
+      account.session_key = wx.session_key;
+      account.lastlogin = new Date().valueOf();
+      account.save();
+
+      const userInfo = App.filter(account, this.saftKey);
+      const accessToken = jwt.sign(userInfo, config.accessSecret, {
+        expiresIn: "7d"
+      });
+      const refreshToken = jwt.sign(userInfo, config.refreshSecret, {
+        expiresIn: "30d"
+      });
+      const expires = new Date().valueOf() + 7 * 24 * 60 * 60 * 1000;
+
+      return this.ok.oklogin({ ...userInfo, accessToken, refreshToken, expires });
+    } catch (err: any) {
+      if (err.isdefine) throw err;
+      throw this.error.network(err);
+    }
+  }
+
   async refreshTokens(data: { refreshToken: string }) {
     const keys = ["refreshToken"];
 
@@ -143,7 +186,7 @@ class AccountApp extends App {
   }
 
   async create(data: IAccount, onlyData = false) {
-    const keys = ["username", "passwd"];
+    const keys = ["openid", "session_key"];
 
     if (!App.haskeys(data, keys)) {
       throw this.error.param;
@@ -152,12 +195,9 @@ class AccountApp extends App {
     data = App.filter(data, Account.keys) as IAccount;
 
     try {
-      data.nickname = data.username!;
+      data.nickname = data.nickname || "";
       data.lastlogin = new Date().valueOf() / 1000;
-      const sha256 = crypto.createHash("sha256");
-      data.passwd = sha256.update(data.passwd + __salt).digest("hex");
       data.avatar = data.avatar || "";
-      data.roles = "[]";
       const account = await super.new(data, Account, "username");
       if (onlyData) return account;
       return this.ok.create(App.filter(account, this.saftKey));
@@ -167,55 +207,23 @@ class AccountApp extends App {
     }
   }
 
-  async update(data: IAccount & { oldpasswd: string }) {
-    const keys = ["username"];
+  async update(data: IAccount) {
+    const keys = ["openid"];
 
     if (!App.haskeys(data, keys)) {
       throw this.error.param;
     }
 
-    data = App.filter(data, Account.keys.concat(["id", "oldpasswd"])) as IAccount & { oldpasswd: string };
+    data = App.filter(data, Account.keys.concat(["id"])) as IAccount;
 
     try {
       const account = await this.info(true, Account.keys) as any;
-      if (account.username != data.username) {
+      if (account.openid != data.openid) {
         throw this.error.limited;
       }
       // 用户名不可更改
-      data.username = undefined;
-      if (data.passwd) {
-        let sha256 = crypto.createHash("sha256");
-        const passwd = sha256.update(data.oldpasswd + __salt).digest("hex");
-        if (account.passwd != passwd) {
-          throw this.error.verify;
-        }
-        sha256 = crypto.createHash("sha256");
-        data.passwd = sha256.update(data.passwd + __salt).digest("hex");
-      }
-
-      // Mail 更新重复检查
-      if (data.email && data.email != account.email) {
-        const account = await Account.findOne({
-          where: {
-            email: data.email
-          }
-        });
-        if (account) {
-          throw this.error.existedmail;
-        }
-      }
-
-      // Phone 更新重复检查
-      if (data.phone && data.phone != account.phone) {
-        const account = await Account.findOne({
-          where: {
-            phone: data.phone
-          }
-        });
-        if (account) {
-          throw this.error.existedphone;
-        }
-      }
+      data.openid = undefined;
+      data.session_key = undefined;
       return this.ok.update(
         App.filter(await super.set(data, Account), this.saftKey)
       );
@@ -225,35 +233,15 @@ class AccountApp extends App {
     }
   }
 
-  async exist(username: string, onlyData = false) {
+  async exist(openid: string, onlyData = false) {
     try {
       const data = await Account.findOne({
         where: {
-          username: username
+          openid
         }
       });
       if (onlyData) return data;
       return this.ok.get(!!data);
-    } catch (err: any) {
-      if (err.isdefine) throw err;
-      throw this.error.db(err);
-    }
-  }
-
-  async exists(data: { email?: string, phone?: string }, onlyData = false) {
-    const keys = ["email", "phone"];
-
-    if (!App.hasone(data, keys)) {
-      throw this.error.param;
-    }
-
-    data = App.filter(data, keys);
-    try {
-      const account = await Account.findOne({
-        where: data
-      });
-      if (onlyData) return account;
-      return this.ok.get(!!account);
     } catch (err: any) {
       if (err.isdefine) throw err;
       throw this.error.db(err);
@@ -271,7 +259,7 @@ class AccountApp extends App {
   get islogin() {
     return this.session && this.session.account_login;
   }
-
+  
   async info(onlyData = false, fields?: string[]) {
     if (!this.islogin) {
       throw this.error.nologin;
@@ -279,7 +267,7 @@ class AccountApp extends App {
     fields = fields || this.saftKey;
     const data = await Account.findOne({
       where: {
-        username: this.session.account_login.username
+        openid: this.session.account_login.openid
       }
     });
 
@@ -290,10 +278,10 @@ class AccountApp extends App {
     return this.ok.get(App.filter(data, fields));
   }
 
-  async avatar(username: any) {
+  async avatar(openid: any) {
     const data = await Account.findOne({
       where: {
-        username
+        openid
       },
       attributes: ["avatar"]
     });
@@ -310,7 +298,7 @@ class AccountApp extends App {
   async find(query: any, fields?: string[], onlyData = false) {
     const ops = {
       id: App.ops.in,
-      username: App.ops.in
+      openid: App.ops.in
     };
     query = App.filter(query, Object.keys(ops));
     try {
@@ -319,8 +307,7 @@ class AccountApp extends App {
         count: -1,
         query
       };
-      data.fields =
-        fields || this.saftKey.filter(k => ["email", "phone"].indexOf(k) < 0);
+      data.fields = fields || this.saftKey;
       const queryData = await super.query(data, Account, ops);
       if (onlyData) return queryData;
       return this.ok.query(queryData);
