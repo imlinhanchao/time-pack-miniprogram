@@ -53,7 +53,7 @@ class AccountApp extends App {
     this.session = session;
     this.name = "用户";
     this.saftKey = ["id"].concat(
-      Account.keys.filter(k => ["passwd"].indexOf(k) < 0)
+      Account.keys.filter(k => ["session_key"].indexOf(k) < 0)
     );
   }
 
@@ -208,10 +208,8 @@ class AccountApp extends App {
   }
 
   async update(data: IAccount) {
-    const keys = ["openid"];
-
-    if (!App.haskeys(data, keys)) {
-      throw this.error.param;
+    if (!data.openid) {
+      data = this.user;
     }
 
     data = App.filter(data, Account.keys.concat(["id"])) as IAccount;
