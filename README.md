@@ -3,4 +3,4 @@
 </p>
 
 <h1 align="center">时间胶囊-小程序</h1>
-<p align="center" style="color: gray"><sub>把记忆送给未来<sub></p>
+<p align="center" style="color: gray"><sub>封存记忆，送给未来<sub></p>
