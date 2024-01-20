@@ -4,7 +4,7 @@ const App = modules.app;
 
 function loader(Module: any) {
   const router = express.Router();
-  router.all("/(:fn)*", function (req, res, next) {
+  router.all("/:fn*", function (req: any, res, next) {
     if (req.params.fn.slice(0, 1) == "_") return res.json(App.error.limited);
     const fn = req.params.fn;
     if (Module.cache && Module.cache[fn]) {
@@ -34,7 +34,7 @@ function loader(Module: any) {
         } else {
           res.json(ret);
         }
-      } catch (err) {
+      } catch (err: any) {
         return res.json(App.err(err));
       }
     })();
@@ -56,7 +56,7 @@ function loader(Module: any) {
         } else {
           res.json(ret);
         }
-      } catch (err) {
+      } catch (err: any) {
         return res.json(App.err(err));
       }
     })();
@@ -78,7 +78,7 @@ function loader(Module: any) {
         } else {
           res.json(ret);
         }
-      } catch (err) {
+      } catch (err: any) {
         return res.json(App.err(err));
       }
     })();

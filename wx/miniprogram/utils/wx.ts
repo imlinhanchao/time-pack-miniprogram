@@ -2,7 +2,7 @@ import { login, refreshToken } from "../api/account";
 
 const app = getApp<IAppOption>();
 
-export function wxlogin() {
+export function wxlogin(app: WechatMiniprogram.App.Instance<IAppOption>) {
   return new Promise(async (resolve, reject) => {
     let userInfo = wx.getStorageSync<IAccount|null>('user');
     if ((userInfo?.expires || 0) < Date.now() && userInfo?.refreshToken) {

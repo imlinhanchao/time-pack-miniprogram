@@ -23,11 +23,13 @@ const orm = {
   }
 };
 export const table_name = prefix + "account";
-export default { 
-  db,
-  tb: table_name,
-  ...db.defineModel(table_name, orm, {
+export default Object.assign(
+  db.defineModel(table_name, orm, {
     comment: "用户表"
-  }),
-  keys: Object.keys(orm)
-}
+  }), 
+  { 
+    db,
+    tb: table_name,
+    keys: Object.keys(orm)
+  }
+)

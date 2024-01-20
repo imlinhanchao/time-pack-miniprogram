@@ -129,7 +129,7 @@ class AccountApp extends App {
       const wx = await wxapi.login(data.code);
       let account = await this.exist(wx.openid, true);
       if (!account) {
-        account = await this.create({
+        await this.create({
           openid: wx.openid,
           session_key: wx.session_key,
           nickname: "",
@@ -137,10 +137,11 @@ class AccountApp extends App {
           lastlogin: new Date().valueOf()
         }, true);
       }
-
-      account.session_key = wx.session_key;
-      account.lastlogin = new Date().valueOf();
-      account.save();
+      else {
+        account.session_key = wx.session_key;
+        account.lastlogin = new Date().valueOf();
+        account.save();
+      }
 
       const userInfo = App.filter(account, this.saftKey);
       const accessToken = jwt.sign(userInfo, config.accessSecret, {
@@ -151,7 +152,7 @@ class AccountApp extends App {
       });
       const expires = new Date().valueOf() + 7 * 24 * 60 * 60 * 1000;
 
-      return this.ok.oklogin({ ...userInfo, accessToken, refreshToken, expires });
+      return this.ok.login({ ...userInfo, accessToken, refreshToken, expires });
     } catch (err: any) {
       if (err.isdefine) throw err;
       throw this.error.network(err);
@@ -198,7 +199,7 @@ class AccountApp extends App {
       data.nickname = data.nickname || "";
       data.lastlogin = new Date().valueOf() / 1000;
       data.avatar = data.avatar || "";
-      const account = await super.new(data, Account, "username");
+      const account = await super.new(data, Account, "openid");
       if (onlyData) return account;
       return this.ok.create(App.filter(account, this.saftKey));
     } catch (err: any) {

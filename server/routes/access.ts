@@ -4,11 +4,11 @@ const router = express.Router();
 const Account = modules.account;
 const App = modules.app;
 
-router.all("/:interface/(:fn)*", function (req: any, res, next) {
+router.all("/:interface/:fn*", function (req: any, res, next) {
   try {
     // 允许不登录访问的接口，若所有函数都允许，则写为 interface: '*'
     const no_login_interface: Record<string, string[] | '*'> = {
-      account: ["login", "exist", "avatar"]
+      account: ["loginWx", "exist", "avatar"]
     };
 
     if (

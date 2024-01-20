@@ -9,10 +9,10 @@ const files = glob.sync(loadFilter);
 
 const models: Record<string, ModelExt> = {};
 
-files.forEach(async (file) => {
+files.forEach((file) => {
   const name = path.basename(file.replace(/\.ts$/, ''));
   file = './orms/' + name;
-  const model = await import(file);
+  const model = require(file).default;
   if (!model) return;
   models[name] = model;
 });

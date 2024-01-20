@@ -8,7 +8,7 @@ files.forEach(async (file) => {
   if (file.endsWith('index.ts')) return;
   const name = path.basename(file.replace(/\.ts$/, ''));
   file = './' + name;
-  const app = await import(file);
+  const app = require(file).default;
   if (!app) return;
   apps[name] = app;
 });

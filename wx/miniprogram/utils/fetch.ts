@@ -1,4 +1,3 @@
-const app = getApp<IAppOption>();
 
 export function setObjToUrlParams (baseUrl: string, obj?: Record<string, string | number>): string {
   if (!obj) return baseUrl;
@@ -36,6 +35,7 @@ export class Http {
   }
 
   static request<T>(url: string, config: Record<string, any>): Promise<T> {
+    const app = getApp<IAppOption>();
     return new Promise((resolve, reject) => {
       url = `${config.apiUrl || app.globalData.apiUrl}${url}`;
 
@@ -45,8 +45,9 @@ export class Http {
       
       wx.request({
         url,
-        ...config,
         header,
+        dataType: '其他',
+        ...config,
         success (res) {
           try {
             if (config.responseType == 'arraybuffer') 

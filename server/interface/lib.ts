@@ -44,4 +44,4 @@ class Lib extends App {
   }
 }
 
-module.exports = Lib;
+export default Lib;

@@ -3,9 +3,9 @@ import { wxlogin } from "./utils/wx";
 // app.ts
 App<IAppOption>({
   globalData: {
-    apiUrl: `http://127.0.0.1:3000`,
+    apiUrl: `http://127.0.0.1:3000/api`,
   },
-  onLaunch() {
-    wxlogin();
+  onShow() {
+    wxlogin(this);
   },
 })
