@@ -8,7 +8,7 @@ router.all("/:interface/(:fn)*", function (req: any, res, next) {
   try {
     // 允许不登录访问的接口，若所有函数都允许，则写为 interface: '*'
     const no_login_interface: Record<string, string[] | '*'> = {
-      account: ["login", "query", "exist", "create", "exists", "avatar"]
+      account: ["login", "exist", "avatar"]
     };
 
     if (

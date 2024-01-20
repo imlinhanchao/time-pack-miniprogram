@@ -9,9 +9,6 @@ const router = express.Router();
 router.use(access);
 router.use("/lib", lib);
 router.use("/account", loader(modules.account));
-router.use("/product", loader(modules.product));
-router.use("/custom", loader(modules.custom));
-router.use("/order", loader(modules.order));
 
 router.get("/", function (req, res) {
   res.render("index", { title: "API" });

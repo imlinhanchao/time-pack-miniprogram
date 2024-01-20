@@ -16,13 +16,13 @@
         "ts-node/register"
       ],
       "args": [
-        "${workspaceRoot}/index.ts"
+        "${workspaceRoot}/server/index.ts"
       ],
       "env": {
         "TS_NODE_PROJECT": "tsconfig.json"
       },
       "sourceMaps": true,
-      "cwd": "${workspaceRoot}"
+      "cwd": "${workspaceRoot}/server"
     }
   ]
 }
