@@ -15,7 +15,6 @@ export function setObjToUrlParams (baseUrl: string, obj?: Record<string, string 
 }
 
 export class Http {
-  static token = '';
   static get<T>(url: string, params: Record<string, string | number>, config?: Record<string, any>) {
     return this.request<T>(
       setObjToUrlParams(url, params),
@@ -39,12 +38,15 @@ export class Http {
   static request<T>(url: string, config: Record<string, any>): Promise<T> {
     return new Promise((resolve, reject) => {
       url = `${config.apiUrl || app.globalData.apiUrl}${url}`;
+
+      const header: any = {};
+      if (app.globalData.userInfo?.accessToken) 
+        header['Authorization'] = `Bearer ${app.globalData.userInfo?.accessToken}`;
+      
       wx.request({
         url,
         ...config,
-        header: {
-          Authorization: `Bearer ${this.token}`,
-        },
+        header,
         success (res) {
           try {
             if (config.responseType == 'arraybuffer') 
