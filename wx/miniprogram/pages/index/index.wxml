@@ -4,7 +4,7 @@
   <view class="container">
     <view class="home">
       <block>
-        <button class="btn primary">
+        <button class="btn primary" bind:tap="createCapsule">
           封装胶囊
         </button>
         <button class="btn default">
