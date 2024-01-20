@@ -54,7 +54,8 @@ class App {
       { fun: App.ok, name: "query", msg: "查询成功" },
       { fun: App.ok, name: "create", msg: "创建成功" },
       { fun: App.ok, name: "update", msg: "更新成功" },
-      { fun: App.ok, name: "delete", msg: "删除成功" }
+      { fun: App.ok, name: "delete", msg: "删除成功" },
+      { fun: App.ok, name: "get", msg: "获取成功" }
     ]);
 
     for (const i in rsps) {
@@ -120,7 +121,7 @@ class App {
 
     keys = ["id"].concat(keys).concat(["create_time", "update_time"]);
 
-    if (!App.haskeys(data, ["currentPage", "pageSize"])) {
+    if (!App.haskeys(data, ["index", "count"])) {
       throw App.error.param;
     }
 
@@ -138,17 +139,15 @@ class App {
     q.order = App.order(data.order, keys);
     q.group = data.group;
 
-    let datalist = [],
-      total = 0;
+    let datalist = [], total = 0;
     try {
       q.attributes = [[Model.db.fn("COUNT", Model.db.col("id")), "total"]];
       total = (await Model.findOne(q))?.dataValues.total || 0; // 获取总数
 
       q.attributes = undefined;
 
-      q.offset =
-        ((parseInt(data.currentPage) || 1) - 1) * parseInt(data.pageSize);
-      if (parseInt(data.pageSize) > 0) q.limit = parseInt(data.pageSize);
+      q.offset = parseInt(data.index);
+      q.limit = parseInt(data.count);
 
       datalist = await Model.findAll(q);
       const fields = data.fields || keys;

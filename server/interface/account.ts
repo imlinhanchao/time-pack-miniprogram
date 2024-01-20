@@ -48,7 +48,6 @@ class AccountApp extends App {
     super([
       { fun: App.ok, name: "login", msg: "登录成功" },
       { fun: App.ok, name: "logout", msg: "登出成功" },
-      { fun: App.ok, name: "get", msg: "获取成功" }
     ]);
     this.session = session;
     this.name = "用户";

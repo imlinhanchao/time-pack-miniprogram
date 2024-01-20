@@ -21,6 +21,10 @@ const orm = {
     type: db.INTEGER,
     comment: "类型，1：文字，2：图片，3：视频，4：音频"
   },
+  gift: {
+    type: db.BOOLEAN,
+    comment: "是否礼物"
+  },
   status: {
     type: db.INTEGER,
     comment: "状态，1：已封存，2：已开启"
