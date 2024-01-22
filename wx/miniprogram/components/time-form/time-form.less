@@ -1,0 +1,72 @@
+/* components/time-form.wxss */
+form {
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+input {
+  border: 2px solid rgb(0, 0, 0);
+  background: rgb(244, 244, 244);
+  border-radius: 80rpx;
+  font-size: 40rpx;
+  min-height: 90rpx;
+  padding: 0 30rpx 10rpx;
+  box-shadow: 0rpx 10rpx 0rpx 0rpx rgb(24, 25, 31);
+  margin-bottom: 30rpx;
+}
+
+textarea {
+  padding: 20rpx 30rpx 30rpx;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 40rpx;
+  box-shadow: 0rpx 10rpx 0rpx 0rpx rgb(24, 25, 31);
+  margin-bottom: 30rpx;
+  min-height: 500rpx;
+  max-height: 55vh;
+}
+
+.time_out {
+  padding: 20rpx;
+  font-size: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  text {
+    font-weight: bold;
+    color: #000;
+  }
+}
+
+.datetime-picker {
+  display: flex;
+  picker {
+    margin-left: 10rpx;
+  }
+}
+
+.submit-btns {
+  background-color: #FFF;
+  display: flex;
+  position: fixed;
+  bottom: 10rpx;
+  left: 0;
+  width: 100%;
+  padding: 10rpx;
+  box-shadow: 0 -20rpx 20rpx 5rpx #FFF;
+  button {
+    width: 100%;
+    margin: 10rpx;
+    border: 8rpx solid rgb(24, 25, 31);
+    border-radius: 90rpx;
+    box-shadow: 0rpx 10rpx 0rpx 0rpx rgb(24, 25, 31);  
+  }
+}
+
+.primary {
+  background-color: #2487ff;
+  color: #fff;
+}
+
+.default {
+  background-color: #d8d8da;
+  color: #000;
+}

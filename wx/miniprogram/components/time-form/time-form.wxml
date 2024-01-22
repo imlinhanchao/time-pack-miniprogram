@@ -1,0 +1,25 @@
+<!--components/time-form.wxml-->
+<form bindsubmit="formSubmit">
+  <!-- 表单内容 -->
+  <input name="title" model:value="{{title}}" placeholder="标题" />
+  <textarea name="content" model:value="{{content}}" placeholder="说点什么吧" auto-height />
+  <view class="time_out">
+    <text>开启之时：</text>
+    <view class="datetime-picker">
+      <picker mode="date" model:value="{{date}}" start="{{today}}" bindchange="bindTimeoutDate">
+        <view class="picker">
+          {{date}}
+        </view>
+      </picker>
+      <picker mode="time" model:value="{{time}}" bindchange="bindTimeoutDate">
+        <view class="picker">
+          {{time}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="submit-btns">
+    <button form-type="gift" class="default">赠送</button>
+    <button form-type="submit" class="primary">封装</button>
+  </view>
+</form>
