@@ -23,6 +23,7 @@ Component({
     create_user: getApp().globalData.userInfo?.openid,
     create_nick: '',
     create_avatar: '',
+    status: 1,
     today: formatDate(new Date()),
     date: formatDate(addTime(new Date(), 10, 'year')),
     time: formatDate(new Date(), 'HH:mm'),
@@ -33,8 +34,35 @@ Component({
   methods: {
     bindTimeoutDate() {
       this.setData({
-        time_out: new Date(this.data.date + ' ' + this.data.time).getTime()
+        time_out: new Date(this.data.date + ' ' + this.data.time + ':00').getTime()
       })
+    },
+    save() {
+      if (!this.data.title) {
+        wx.showToast({
+          title: '请输入标题',
+          icon: 'none'
+        })
+        return;
+      }
+      if (!this.data.content) {
+        wx.showToast({
+          title: '请输入内容',
+          icon: 'none'
+        })
+        return;
+      }
+      if (!this.data.time_out) {
+        wx.showToast({
+          title: '请选择时间',
+          icon: 'none'
+        })
+        return;
+      }
+      this.triggerEvent('save', this.data, {})
     }
+  },
+  attached() {
+    this.bindTimeoutDate();
   }
 })

@@ -2,9 +2,9 @@ import dayjs from "dayjs";
 
 export const mmt = dayjs;
 
-export const DATE_FORMAT = 'YYYY-MM-DD';
-export const DATE_FORMAT_TIME = 'YYYY-MM-DD HH:mm:ss';
-export const DATE_FORMAT_TIME_NO_SEC = 'YYYY-MM-DD HH:mm';
+export const DATE_FORMAT = 'YYYY/MM/DD';
+export const DATE_FORMAT_TIME = 'YYYY/MM/DD HH:mm:ss';
+export const DATE_FORMAT_TIME_NO_SEC = 'YYYY/MM/DD HH:mm';
 
 export function formatDate(date: dayjs.ConfigType, format = DATE_FORMAT): string {
   return dayjs(date).format(format);

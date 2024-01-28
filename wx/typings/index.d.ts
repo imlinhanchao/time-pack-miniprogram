@@ -7,3 +7,9 @@ interface IAppOption {
   }
   userInfoReadyCallback?: WechatMiniprogram.GetUserInfoSuccessCallback,
 }
+
+interface IRsp<T> {
+  state: number;
+  msg: string;
+  data: T;
+}

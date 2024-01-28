@@ -9,6 +9,7 @@ const router = express.Router();
 router.use(access);
 router.use("/lib", lib);
 router.use("/account", loader(modules.account));
+router.use("/capsule", loader(modules.capsule));
 
 router.get("/", function (req, res) {
   res.render("index", { title: "API" });

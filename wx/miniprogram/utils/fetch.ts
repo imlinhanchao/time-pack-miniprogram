@@ -49,6 +49,9 @@ export class Http {
         dataType: '其他',
         ...config,
         success (res) {
+          if (res.statusCode !== 200) {
+            return reject(new Error(`网络请求错误，状态码${res.statusCode}`));
+          }
           try {
             if (config.responseType == 'arraybuffer') 
               return resolve(res.data as T);

@@ -55,7 +55,7 @@ class CapsuleApp extends App {
       const modelData = await super.new(data, Capsule);
       if (onlyData) return modelData;
       return this.ok.create(
-        App.filter(modelData, this.saftKey.filter(k => k == 'content'))
+        App.filter(modelData, this.saftKey.filter(k => k != 'content'))
       );
     } catch (err: any) {
       if (err.isdefine) throw err;
@@ -83,7 +83,7 @@ class CapsuleApp extends App {
 
       if (onlyData) return capsule;
       return this.ok.update(
-        App.filter(capsule, this.saftKey.filter(k => k == 'content'))
+        App.filter(capsule, this.saftKey.filter(k => k != 'content'))
       );
     } catch (err: any) {
       if (err.isdefine) throw err;

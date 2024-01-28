@@ -2,6 +2,6 @@
 <navigation-bar title="时间胶囊" back="{{false}}" color="black" background="#FFF"></navigation-bar>
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
-    <time-form></time-form>
+    <time-form bind:save="save"></time-form>
   </view>
 </scroll-view>
