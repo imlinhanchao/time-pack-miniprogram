@@ -13,3 +13,10 @@ interface ICapsule {
   create_time?: number;
   update_time?: number;
 }
+
+interface ICapsuleQuery {
+  title: string;
+  index?: number;
+  count?: number;
+  fields?: string;
+}

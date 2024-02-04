@@ -1,13 +1,13 @@
 <!--index.wxml-->
 <navigation-bar title="时间胶囊" back="{{false}}" color="black" background="#FFF"></navigation-bar>
 <scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
+  <view class="container center">
     <view class="home">
       <block>
         <button class="btn primary" bind:tap="createCapsule">
           封装胶囊
         </button>
-        <button class="btn default">
+        <button class="btn default" bind:tap="openCapsules">
           打开胶囊
         </button>
       </block>

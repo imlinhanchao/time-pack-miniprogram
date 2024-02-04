@@ -14,7 +14,7 @@ export function setObjToUrlParams (baseUrl: string, obj?: Record<string, string 
 }
 
 export class Http {
-  static get<T>(url: string, params: Record<string, string | number>, config?: Record<string, any>) {
+  static get<T>(url: string, params: Record<string, string | number> | any, config?: Record<string, any>) {
     return this.request<T>(
       setObjToUrlParams(url, params),
       {

@@ -1,0 +1,13 @@
+<!--pages/list/list.wxml-->
+<navigation-bar title="时间胶囊" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<view class="search-input">
+  <input placeholder="搜索" confirm-type="search" />
+  <button class="btn-text"><image src="../../assets/img/search.svg" /></button>
+</view>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="capsule" wx:for="{{capsules}}">
+      <text>{{item.title}}</text>
+    </view>
+  </view>
+</scroll-view>

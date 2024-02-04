@@ -1,10 +1,36 @@
 /**app.wxss**/
+view, input, textarea {
+  box-sizing: border-box;
+  color: #000;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+}
+
 .container {
-  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+  color: #aaa;
+  width: 100%;
+  padding: 0 1em;
+  &.center {
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 200rpx 0;
+    box-sizing: border-box;
+  }
+}
+
+.btn-text {
+  width: 1em;
+  min-width: 1em;
+  margin: 0;
+  padding: 0;
+  image {
+    width: 1em;
+    height: 1em;
+  }
+}

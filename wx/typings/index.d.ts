@@ -13,3 +13,16 @@ interface IRsp<T> {
   msg: string;
   data: T;
 }
+
+interface IPageRsp<T> {
+  state: number;
+  msg: string;
+  data: IPage<T>;
+}
+
+interface IPage<T> {
+  list: T[];
+  total: number;
+  currentPage: number;
+  pageSize: number;
+}

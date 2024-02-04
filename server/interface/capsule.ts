@@ -162,10 +162,10 @@ class CapsuleApp extends App {
       data = {
         index: 0,
         count: 20,
+        fields: data.fields ? data.fields.split(',') : this.saftKey,
         ...data,
         query
       };
-      data.fields = this.saftKey;
 
       const queryData = await super.query(data, Capsule, ops);
       queryData.list.forEach((item: any) => {

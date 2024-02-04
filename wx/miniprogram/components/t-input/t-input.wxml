@@ -1,0 +1,5 @@
+<!--components/t-input/t-input.wxml-->
+<view class="search-input">
+  <input placeholder="{{placeholder}}" confirm-type="{{confirmType}}" />
+  <slot name="append"></slot>
+</view>
