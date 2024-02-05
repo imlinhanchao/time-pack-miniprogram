@@ -7,7 +7,8 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "dayjs": "^1.11.10"
+    "dayjs": "^1.11.10",
+    "miniprogram-computed": "^4.4.0"
   },
   "devDependencies": {
     "miniprogram-api-typings": "^2.8.3-1"

@@ -10,6 +10,8 @@ Component({
     title: '',
     capsules: [] as ICapsule[],
     total: 0,
+    now: new Date().getTime(),
+    timer: 0,
   },
 
   methods: {
@@ -23,10 +25,25 @@ Component({
           total,
         })
       });
-    }
+    },
   },
 
   attached() {
     this.load();
+    const timer = setInterval(() => {
+      console.log('setInterval');
+      this.setData({
+        now: new Date().getTime(),
+      });
+    }, 1000);
+    this.setData({
+      timer,
+    });
+  },
+
+  detached() {
+    if (this.data.timer) {
+      clearInterval(this.data.timer);
+    }
   }
 })

@@ -6,8 +6,9 @@
 </view>
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
-    <view class="capsule" wx:for="{{capsules}}">
-      <text>{{item.title}}</text>
+    <view class="capsule" wx:for="{{capsules}}" wx:for-index="idx" wx:key="unique">
+      <view class="header"><text class="title">{{item.title}}</text><text class="tip">距离解封还有 </text></view>
+      <view class="time"><time-diff start="{{now}}" end="{{item.time_out}}" /></view>
     </view>
   </view>
 </scroll-view>
