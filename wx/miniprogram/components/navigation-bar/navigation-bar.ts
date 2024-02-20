@@ -100,6 +100,19 @@ Component({
         })
       }
       this.triggerEvent('back', { delta: data.delta }, {})
+    },
+    home() {
+      const data = this.data
+      if (data.delta) {
+        wx.navigateTo({
+          url: '../index/index',
+          delta: data.delta
+        })
+      }
+      wx.navigateTo({
+        url: '../index/index',
+        delta: data.delta
+      })
     }
   },
 })
