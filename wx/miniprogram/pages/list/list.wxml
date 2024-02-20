@@ -1,14 +1,11 @@
 <!--pages/list/list.wxml-->
-<navigation-bar title="时间胶囊" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<navigation-bar title="时间胶囊" back="{{false}}" color="black" background="#FFF" homeButton="{{true}}"></navigation-bar>
 <view class="search-input">
   <input placeholder="搜索" confirm-type="search" />
   <button class="btn-text"><image src="../../assets/img/search.svg" /></button>
 </view>
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
-    <view class="capsule" wx:for="{{capsules}}" wx:for-index="idx" wx:key="unique">
-      <view class="header"><text class="title">{{item.title}}</text><text class="tip">距离解封还有 </text></view>
-      <view class="time"><time-diff start="{{now}}" end="{{item.time_out}}" /></view>
-    </view>
+    <time-item class="capsule" wx:for="{{capsules}}" wx:for-index="idx" wx:key="unique" item="{{item}}" now="{{now}}" />
   </view>
 </scroll-view>

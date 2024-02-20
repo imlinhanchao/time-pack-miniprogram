@@ -31,7 +31,6 @@ Component({
   attached() {
     this.load();
     const timer = setInterval(() => {
-      console.log('setInterval');
       this.setData({
         now: new Date().getTime(),
       });

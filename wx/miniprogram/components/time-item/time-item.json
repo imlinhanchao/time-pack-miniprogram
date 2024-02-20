@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "time-diff": "/components/time-diff/time-diff"
+  }
+}

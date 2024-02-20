@@ -20,7 +20,6 @@ ComponentWithComputed({
       const hour = Math.floor(diff % 86400000 / 3600000);
       const minute = Math.floor(diff % 3600000 / 60000);
       const second = Math.floor(diff % 60000 / 1000);
-      console.log(`${year}年${day}天${hour}小时${minute}分${second}秒`);
       return `${year > 0 ? `${year}年`: ``
       }${day > 0 || year > 0 ? `${day}天`: ``
       }${hour > 0 || day > 0 || year > 0 ? `${hour}小时`: ``

@@ -1,5 +1,5 @@
 <!--create.wxml-->
-<navigation-bar title="时间胶囊" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<navigation-bar title="时间胶囊" back="{{false}}" homeButton="{{true}}" color="black" background="#FFF"></navigation-bar>
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
     <time-form bind:save="save"></time-form>

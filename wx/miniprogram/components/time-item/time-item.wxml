@@ -1,0 +1,4 @@
+<view class="capsule">
+  <view class="header"><text class="title">{{item.title}}</text><text class="tip">距离解封还有 </text></view>
+  <view class="time"><time-diff start="{{now}}" end="{{item.time_out}}" /></view>
+</view>
