@@ -43,6 +43,7 @@ class CapsuleApp extends App {
   async create(data: ICapsule, onlyData = false) {
     const keys = Capsule.keys;
 
+    data.create_user = this.account.user.openid;
     if (!App.haskeys(data, keys)) {
       throw this.error.param;
     }
@@ -50,7 +51,6 @@ class CapsuleApp extends App {
     data = App.filter(data, Capsule.keys) as ICapsule;
 
     try {
-      data.create_user = this.account.user.openid;
       if (!data.gift) data.user = this.account.user.openid; 
       const modelData = await super.new(data, Capsule);
       if (onlyData) return modelData;

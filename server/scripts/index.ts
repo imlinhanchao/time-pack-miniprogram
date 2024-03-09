@@ -128,7 +128,7 @@ export function initDB() {
       console.error(`Init model failed: ${err.message}`);
     }
     console.info(
-      "Please execute 'npm run build' to build frontend, and then execute 'npm start' to start the website."
+      "Please execute 'npm start' to start the website."
     );
     process.exit();
   })();
