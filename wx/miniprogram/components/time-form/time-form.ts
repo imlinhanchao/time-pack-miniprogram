@@ -20,7 +20,7 @@ Component({
     time_out: 0,
     type: '1',
     gift: false,
-    create_user: getApp().globalData.userInfo?.openid,
+    create_user: '',
     create_nick: '',
     create_avatar: '',
     status: 1,
@@ -62,7 +62,12 @@ Component({
       this.triggerEvent('save', this.data, {})
     }
   },
-  attached() {
-    this.bindTimeoutDate();
+  lifetimes: {
+    attached() {
+      this.bindTimeoutDate();
+      this.setData({
+        create_user: getApp().globalData.userInfo.openid
+      })
+    }
   }
 })
