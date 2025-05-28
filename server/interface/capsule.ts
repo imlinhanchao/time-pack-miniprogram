@@ -51,6 +51,7 @@ class CapsuleApp extends App {
     data = App.filter(data, Capsule.keys) as ICapsule;
 
     try {
+      data.type = data.type || 1; // 默认类型为1
       if (!data.gift) data.user = this.account.user.openid; 
       const modelData = await super.new(data, Capsule);
       if (onlyData) return modelData;
@@ -75,7 +76,7 @@ class CapsuleApp extends App {
     try {
       const account = this.account.user;
       let capsule = await this.read(data.id!, true);
-      if (account.openid != capsule.user || !capsule.user) {
+      if (account.openid != capsule.user && capsule.user || capsule.status !== 0) {
         throw this.error.limited;
       }
       
@@ -149,19 +150,19 @@ class CapsuleApp extends App {
       title: App.ops.like,
     };
 
-    const query = App.filter(data.query, Object.keys(ops));
+    const query = App.filter(data.query || data, Object.keys(ops));
 
     try {
-      if (query.type == 'my') {
-        query.query.user = (await new AccountApp(this.session).user.openid);
+      if (data.tab != 'gift') {
+        query.user = (await new AccountApp(this.session).user.openid);
       } else {
         query.create_user = (new AccountApp(this.session).user.openid);
         query.gift = true;
       }
 
       data = {
-        index: 0,
-        count: 20,
+        index: data.index || 0,
+        count: data.count || 20,
         fields: data.fields ? data.fields.split(',') : this.saftKey,
         ...data,
         query

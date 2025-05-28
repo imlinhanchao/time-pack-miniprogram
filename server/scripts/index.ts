@@ -109,7 +109,7 @@ export async function main() {
           JSON.stringify(db, null, 4),
           err => {
             if (err) console.error(`Save db config failed: ${err.message}`);
-            else initDB();
+            else setTimeout(() => initDB(), 100);
           }
         );
       }

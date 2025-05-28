@@ -27,7 +27,7 @@ const orm = {
   },
   status: {
     type: db.INTEGER,
-    comment: "状态，1：已封存，2：已开启",
+    comment: "状态，0：待领取，1：已封存，2：已开启",
   },
   create_user: {
     type: db.STRING(256),
@@ -39,7 +39,7 @@ const orm = {
   },
   create_avatar: {
     type: db.STRING(256),
-    comment: "创建用户昵称",
+    comment: "创建用户头像地址",
   },
 };
 export const table_name = prefix + "capsule";
