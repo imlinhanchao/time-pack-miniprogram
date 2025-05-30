@@ -1,0 +1,11 @@
+<!--pages/home.wxml-->
+<navigation-bar title="时间胶囊" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container center">
+    <view class="home">
+      <image src="../../assets/img/logo.png" class="main-logo-image"></image>
+      <image src="../../assets/img/time.png" class="main-time-image"></image>
+      <view class="my-capsule" bind:tap="openCapsules">我的胶囊</view>
+    </view>
+  </view>
+</scroll-view>

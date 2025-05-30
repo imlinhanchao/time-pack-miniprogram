@@ -1,0 +1,16 @@
+<!--pages/my/my.wxml-->
+<view class="my-container">
+  <view class="top-container">
+    <navigation-bar title="我的胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="white" background="#2487FF"></navigation-bar>
+    <view class="search-container">
+      <view class="search-box">
+        <input class="search-input" placeholder="搜索"> </input>
+        <image src="../../assets/img/search.svg" class="search-icon"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="container my-container">
+    <pack-item class="capsule" wx:for="{{capsules}}" wx:for-index="idx" wx:key="unique" item="{{item}}" now="{{now}}" />
+  </view>
+</view>

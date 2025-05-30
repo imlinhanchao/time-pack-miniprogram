@@ -1,0 +1,18 @@
+<!--pages/write/write.wxml-->
+<view class="write-container">
+  <view class="top-container">
+    <navigation-bar title="时间胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="white" background="#2487FF"></navigation-bar>
+    <view class="title-container">
+      <view class="title-box">
+        <input class="title-input" placeholder="标题"> </input>
+      </view>
+    </view>
+  </view>
+
+  <view class="container write-container">
+      <textarea class="write-area">
+      </textarea>
+  </view>
+
+
+</view>

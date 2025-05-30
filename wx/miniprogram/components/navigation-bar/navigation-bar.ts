@@ -14,6 +14,10 @@ Component({
       type: String,
       value: ''
     },
+    showLogo: {
+      type: Boolean,
+      value: true
+    },
     background: {
       type: String,
       value: ''
