@@ -1,0 +1,27 @@
+<view class="read-container">
+  <view class="top-container">
+    <navigation-bar title="时间胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="white" background="#2487FF"></navigation-bar>
+    <view class="title">啦啦啦啦</view>
+  </view>
+
+  <view class="container read-container">
+    <view class="content">
+      虽然我没有穿越时空的能力，但此刻的我想给未来的，65岁的自己写一份信，对我来说这不仅是一封信，也是一颗时间胶囊，等65岁的我打开。
+
+      这是一种跨越时空的对话吧，想好好记录，保存此刻18岁的我的心境。
+    </view>
+  </view>
+  <view class="bottom-info">
+    <view class="user-info">
+      <image class="head-image"></image>
+      <view class="user-name">
+        我是跳跳吧
+        <text class="send-text">赠送</text>
+      </view>
+    </view>
+    <view class="pack-time">
+      封装时间
+      <text class="pack-time-text">2024年10月1日</text>
+    </view>
+  </view>
+</view>

@@ -1,25 +1,18 @@
-import { addTime, formatDate } from "../../utils/date";
-// pages/write/write.ts
+// pages/read/read.ts
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    minWriteHeight:0,
-    date: formatDate(addTime(new Date(), 10, 'year')),
-    time: formatDate(new Date(), 'HH:mm'),
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    const windowInfo = wx.getWindowInfo()
-    console.log(windowInfo)
-    this.setData({
-      minWriteHeight:windowInfo.windowHeight
-    })
+
   },
 
   /**

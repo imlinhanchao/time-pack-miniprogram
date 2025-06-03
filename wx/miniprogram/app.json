@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/read/read",
     "pages/write/write",
     "pages/my/my",
     "pages/home/home",
@@ -7,7 +8,6 @@
     "pages/logs/logs",
     "pages/create/create",
     "pages/list/list"
- 
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -10,32 +10,42 @@
   </view>
 
   <view class="write-box">
-    <textarea class="write-area" style="min-height: {{minWriteHeight}}px;">
+    <textarea class="write-area" style="min-height: {{minWriteHeight}}px;" 	
+    maxlength="-1" auto-height="true">
       </textarea>
+      <view style="height:230rpx"></view>
   </view>
   <view class="bottom-area">
     <view class="open-time">
       <image src="../../assets/img/clock-blue.png" class="time-icon"></image>
       <text class="open-time-text">开启之时</text>
+      <view style="flex:1"></view>
       <picker mode="date">
         <view class="picker">
+          {{date}}  
+         
+        </view>
+      </picker>
+      <picker mode="time" style="margin-left: 20rpx;">
+        <view class="picker">
+          {{time}}
+          <image src="../../assets/img/arrow.png" class="arrow-icon" style="margin-left: 10rpx;"></image>
         </view>
       </picker>
     </view>
+    <view class="line"></view>
     <view class="submit-btns">
       <button form-type="gift" class="sendBtn">
         <view class="btn-box">
           <image src="../../assets/img/gift.png" class="time-icon btn-icon"></image>
           赠送好友
         </view>
-
       </button>
       <button form-type="submit" class="packBtn">
         <view class="btn-box">
           <image src="../../assets/img/pack.png" class="time-icon btn-icon"></image>
           封装胶囊
         </view>
-
       </button>
     </view>
   </view>

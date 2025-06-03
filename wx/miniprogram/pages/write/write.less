@@ -50,7 +50,7 @@ page{
   border-radius: 40rpx 40rpx 0 0;
   box-shadow: 0rpx -10rpx 0rpx 0rpx rgb(27, 101, 191);
   z-index: 998;
-  padding: 20rpx;
+  padding: 10rpx  30rpx;
 }
 
 .write-area{
@@ -58,12 +58,10 @@ page{
   width: 100%;
   font-size: 40rpx;
   line-height: 56rpx; 
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 55rpx,
-    #ccc 56rpx
-  );
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='100%' height='24'>\
+    <line x1='0' y1='23' x2='100%' y2='23' stroke='%23ccc' stroke-width='1' stroke-dasharray='4,4'/>\
+  </svg>");
   background-size: 100% 56rpx; 
   box-sizing: border-box;
   resize: vertical;
@@ -74,13 +72,17 @@ page{
   bottom: 0;
   width: 100%;
   z-index: 999;
-  padding-bottom: 40rpx;
+  padding-bottom: 60rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  background-color: #fff;
 }
 
 .open-time{
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 0 10rpx;
 }
 
 .time-icon{
@@ -93,21 +95,43 @@ page{
   margin-left: 10rpx;
 }
 
+.picker{
+  color:#C6C5CB;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.arrow-icon{
+  width: 24rpx;
+  height: 48rpx;
+}
+
 .submit-btns {
-  background-color: #FFF;
+  background-color: #ffffff;
   display: flex;
   bottom: 10rpx;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   left: 0;
   width: 100%;
-  padding: 10rpx;
-  box-shadow: 0 -20rpx 20rpx 5rpx #FFF;
   button {
-    width: 100%;
-    margin: 10rpx;
+    margin: 0rpx;
+    width: 266rpx;
+    font-size: 24rpx;
     border: 8rpx solid rgb(24, 25, 31);
     border-radius: 90rpx;
     box-shadow: 0rpx 10rpx 0rpx 0rpx rgb(24, 25, 31);  
   }
+}
+
+.line{
+  width: 100%;
+  height: 1rpx;
+  background-color: #eee;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }
 
 .packBtn {
