@@ -9,10 +9,34 @@
     </view>
   </view>
 
-  <view class="container write-container">
-      <textarea class="write-area">
+  <view class="write-box">
+    <textarea class="write-area" style="min-height: {{minWriteHeight}}px;">
       </textarea>
   </view>
+  <view class="bottom-area">
+    <view class="open-time">
+      <image src="../../assets/img/clock-blue.png" class="time-icon"></image>
+      <text class="open-time-text">开启之时</text>
+      <picker mode="date">
+        <view class="picker">
+        </view>
+      </picker>
+    </view>
+    <view class="submit-btns">
+      <button form-type="gift" class="sendBtn">
+        <view class="btn-box">
+          <image src="../../assets/img/gift.png" class="time-icon btn-icon"></image>
+          赠送好友
+        </view>
 
+      </button>
+      <button form-type="submit" class="packBtn">
+        <view class="btn-box">
+          <image src="../../assets/img/pack.png" class="time-icon btn-icon"></image>
+          封装胶囊
+        </view>
 
+      </button>
+    </view>
+  </view>
 </view>

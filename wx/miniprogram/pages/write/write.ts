@@ -5,14 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    minWriteHeight:0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    const windowInfo = wx.getWindowInfo()
+    console.log(windowInfo)
+    this.setData({
+      minWriteHeight:windowInfo.windowHeight
+    })
   },
 
   /**
