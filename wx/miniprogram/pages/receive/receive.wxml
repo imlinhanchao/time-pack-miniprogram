@@ -1,0 +1,36 @@
+<!--pages/receive/receive.wxml-->
+<view class="receive-container">
+  <view class="top-container">
+    <navigation-bar title="接收胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="black" background="#FFF"></navigation-bar>
+  </view>
+  <view class="receive-box">
+    <view class="receive-info">
+      <view class="send-user">
+        <image class="send-head"></image>
+        跳跳
+      </view>
+      <view class="send-content">
+        <view>赠送你</view>
+        <view>一个时间胶囊</view>
+      </view>
+      <view class="open-time-container">
+        <view class="open-time">
+          <view class="open-time-box">
+            <image src="../../assets/img/clock-gray.png" class="open-time-icon"></image>
+            <view>开启时间</view>
+          </view>
+          <view class="open-time-text">
+            2023年10月1日 10点
+          </view>
+        </view>
+        <button class="receive-btn">
+          收下了
+        </button>
+      </view>
+
+
+    </view>
+
+  </view>
+
+</view>

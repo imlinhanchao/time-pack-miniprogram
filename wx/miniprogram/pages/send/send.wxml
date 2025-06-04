@@ -9,8 +9,26 @@
         <image src="../../assets/img/red-pack.png" class="send-icon"></image>
         时间胶囊
       </view>
+      <view class="send-content">
+        <view>已封装</view>
+        <view>右上角转发给好友吧！</view>
+      </view>
+      <view class="open-time">
+        <view class="open-time-box">
+          <image src="../../assets/img/clock-red.png" class="open-time-icon"></image>
+          <view>开启时间</view>
+        </view>
+        <view class="open-time-text">
+          2023年10月1日 10点
+        </view>
+      </view>
     </view>
 
   </view>
+  <view class="bottom-view">
+  <view>
+    + 再写一个
+  </view>
 
+  </view>
 </view>

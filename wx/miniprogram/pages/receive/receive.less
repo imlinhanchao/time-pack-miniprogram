@@ -4,7 +4,7 @@ page{
 }
 
 
-.send-container{
+.receive-container{
   position: relative;
   height: 100%;
 }
@@ -15,14 +15,14 @@ page{
   width: 100%;
 }
 
-.send-box{
+.receive-box{
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
 }
 
-.send-info{
+.receive-info{
   width: 654rpx;
   border: 4rpx solid #18191F;
   border-radius: 16rpx;
@@ -33,37 +33,60 @@ page{
   align-items: center;
 }
 
-.send-title{
+.send-user{
   color: rgb(24, 25, 31);
   font-size: 64rpx;
   font-weight: 700;
+  width: 100%;
   display: flex;
   align-items: center;
 
 }
 
-.send-icon{
-  width: 80rpx;
-  height: 67rpx;
-  margin-right: 10rpx;
+.send-head{
+  width: 92rpx;
+  height: 92rpx;
+  margin-right: 20rpx;
+  border: 2rpx solid rgb(0, 0, 0);
+  border-radius: 200rpx;
 }
 
 .send-content{
   width: 100%;
   margin-top: 100rpx;
-  font-size: 48rpx;
+  font-size: 72rpx;
   font-weight: 700;
   line-height: 80rpx;
   color: rgb(24, 25, 31);
+}
+
+.open-time-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 300rpx;
 }
 
 .open-time{
   width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  margin-top: 300rpx;
-  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+
+
+}
+
+.receive-btn {
+  margin: 0rpx;
+  width: 266rpx;
+  font-size: 32rpx;
+  border: 2rpx solid rgb(24, 25, 31);
+  border-radius: 24rpx;
+  box-shadow: 0rpx 8rpx 0rpx 0rpx rgb(0, 0, 0);  
+  background-color: #2487ff;
+  color: #fff;
+  font-weight: 800;
 }
 
 .open-time-box{
@@ -72,6 +95,7 @@ page{
   align-items: center;
   font-size: 34rpx;
   font-weight: 700;
+  color: rgb(166, 166, 166);
 }
 
 .open-time-icon{
@@ -84,16 +108,6 @@ page{
   font-size: 26rpx;
   font-weight: 500;
   color: rgb(166, 166, 166);
+  margin-top: 6rpx;
 }
 
-.bottom-view{
-  position: fixed;
-  bottom: 60rpx;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  font-weight: 400;
-  color: rgba(198, 197, 203);
-  align-items: center;
-  font-size: 36rpx;
-}
