@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/send/send",
     "pages/read/read",
     "pages/write/write",
     "pages/my/my",

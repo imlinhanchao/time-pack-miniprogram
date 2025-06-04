@@ -1,0 +1,16 @@
+<!--pages/send/send.wxml-->
+<view class="send-container">
+  <view class="top-container">
+    <navigation-bar title="赠送胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="black" background="#FFF"></navigation-bar>
+  </view>
+  <view class="send-box">
+    <view class="send-info">
+      <view class="send-title">
+        <image src="../../assets/img/red-pack.png" class="send-icon"></image>
+        时间胶囊
+      </view>
+    </view>
+
+  </view>
+
+</view>
