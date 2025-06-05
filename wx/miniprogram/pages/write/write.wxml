@@ -8,10 +8,8 @@
       </view>
     </view>
   </view>
-
   <view class="write-box">
-    <textarea class="write-area" style="min-height: {{minWriteHeight}}px;" 	
-    maxlength="-1" auto-height="true">
+    <textarea class="write-area" style="min-height: {{minWriteHeight}}px;" 	maxlength="-1" auto-height="true">
       </textarea>
       <view style="height:230rpx"></view>
   </view>
@@ -23,7 +21,6 @@
       <picker mode="date">
         <view class="picker">
           {{date}}  
-         
         </view>
       </picker>
       <picker mode="time" style="margin-left: 20rpx;">

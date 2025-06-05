@@ -109,12 +109,12 @@ Component({
       const data = this.data
       if (data.delta) {
         wx.navigateTo({
-          url: '../index/index',
+          url: '../home/home',
           delta: data.delta
         })
       }
       wx.navigateTo({
-        url: '../index/index',
+        url: '../home/home',
         delta: data.delta
       })
     }

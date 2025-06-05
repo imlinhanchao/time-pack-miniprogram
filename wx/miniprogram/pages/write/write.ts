@@ -9,6 +9,8 @@ Page({
     minWriteHeight:0,
     date: formatDate(addTime(new Date(), 10, 'year')),
     time: formatDate(new Date(), 'HH:mm'),
+    title:'',
+    content:'',
   },
 
   /**
@@ -16,7 +18,7 @@ Page({
    */
   onLoad() {
     const windowInfo = wx.getWindowInfo()
-    console.log(windowInfo)
+    console.log(windowInfo,2222)
     this.setData({
       minWriteHeight:windowInfo.windowHeight
     })

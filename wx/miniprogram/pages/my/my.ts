@@ -20,16 +20,15 @@ Page({
       })
     },
     onSearchTap() {
-
+      this.getList(0)
     },
-    getList() {
+    getList(index:number) {
       if (this.data.loading) {
         return
       }
       this.setData({
         loading: true
       })
-      let index = this.data.capsules.length
       list({
         title: this.data.title,
         index
@@ -61,7 +60,7 @@ Page({
 
 
   onLoad() {
-    this.getList();
+    this.getList(0);
     const timer = setInterval(() => {
       this.setData({
         now: new Date().getTime(),
@@ -79,11 +78,12 @@ Page({
   },
 
   onReachBottom() {
-    console.log("onReachBottom");
-    
     if(this.data.loading){
       return
     }
-    this.getList()
+    if(this.data.capsules.length>=this.data.total){
+      return
+    }
+    this.getList(this.data.capsules.length)
   },
 })

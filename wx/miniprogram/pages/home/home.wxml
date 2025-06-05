@@ -3,8 +3,8 @@
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container center">
     <view class="home">
-      <image src="../../assets/img/logo.png" class="main-logo-image"></image>
-      <image src="../../assets/img/time.png" class="main-time-image"></image>
+      <image src="../../assets/img/logo.png" class="main-logo-image" bind:tap="createCapsule"></image>
+      <image src="../../assets/img/time.png" class="main-time-image" bind:tap="createCapsule"></image>
       <view class="my-capsule" bind:tap="openCapsules">我的胶囊</view>
     </view>
   </view>

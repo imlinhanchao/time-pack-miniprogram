@@ -18,7 +18,7 @@ Component({
     // 事件处理函数
     createCapsule() {
       wx.navigateTo({
-        url: '../create/create',
+        url: '../write/write',
       })
     },
     openCapsules() {
