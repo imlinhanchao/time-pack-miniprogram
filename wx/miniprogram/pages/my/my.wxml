@@ -4,7 +4,7 @@
     <navigation-bar title="我的胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="white" background="#2487FF"></navigation-bar>
     <view class="search-container">
       <view class="search-box">
-        <input class="search-input" placeholder="搜索"> </input>
+        <input class="search-input" placeholder="搜索" bindinput="onSearchInput" placeholder-class="search-placeholer" > </input>
         <image src="../../assets/img/search.svg" class="search-icon"></image>
       </view>
     </view>

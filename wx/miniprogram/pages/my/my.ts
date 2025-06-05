@@ -1,7 +1,7 @@
 import { list } from "../../api/capsule"
 
 // pages/my/my.ts
-Component({
+Page({
 
   /**
    * 页面的初始数据
@@ -12,24 +12,56 @@ Component({
     total: 0,
     now: new Date().getTime(),
     timer: 0,
+    loading: false,
   },
+    onSearchInput(e: any) {
+      this.setData({
+        title: e.detail.value
+      })
+    },
+    onSearchTap() {
 
-  methods: {
-    load() {
+    },
+    getList() {
+      if (this.data.loading) {
+        return
+      }
+      this.setData({
+        loading: true
+      })
+      let index = this.data.capsules.length
       list({
         title: this.data.title,
-        index: this.data.capsules.length,
+        index
       }).then(({ list, total }) => {
-        this.setData({
-          capsules: list,
-          total,
+        if (index == 0) {
+          this.setData({
+            capsules: list,
+            total,
+            loading: false,
+          })
+        } else[
+          this.setData({
+            capsules: [...this.data.capsules, ...list],
+            total,
+            loading: false,
+          })
+        ]
+      }).catch((e: Error) => {
+        wx.showToast({
+          title: '加载失败',
+          icon: 'error',
+          duration: 1000
         })
-      });
+        this.setData({
+          loading: false
+        })
+      })
     },
-  },
 
-  attached() {
-    this.load();
+
+  onLoad() {
+    this.getList();
     const timer = setInterval(() => {
       this.setData({
         now: new Date().getTime(),
@@ -44,5 +76,14 @@ Component({
     if (this.data.timer) {
       clearInterval(this.data.timer);
     }
-  }
+  },
+
+  onReachBottom() {
+    console.log("onReachBottom");
+    
+    if(this.data.loading){
+      return
+    }
+    this.getList()
+  },
 })
