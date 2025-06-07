@@ -1,4 +1,6 @@
 import { addTime, formatDate } from "../../utils/date";
+const DATE_FORMAT1 = 'YYYY-MM-DD';
+import { create } from "../../api/capsule"
 // pages/write/write.ts
 Page({
 
@@ -7,10 +9,13 @@ Page({
    */
   data: {
     minWriteHeight:0,
-    date: formatDate(addTime(new Date(), 10, 'year')),
+    dateValue: formatDate(addTime(new Date(), 10, 'year'),DATE_FORMAT1),
+    date:formatDate(addTime(new Date(), 10, 'year')),
     time: formatDate(new Date(), 'HH:mm'),
     title:'',
     content:'',
+    time_out:addTime(new Date(), 10, 'year').getTime(),
+    today: formatDate(new Date(),DATE_FORMAT1),
   },
 
   /**
@@ -18,9 +23,60 @@ Page({
    */
   onLoad() {
     const windowInfo = wx.getWindowInfo()
-    console.log(windowInfo,2222)
     this.setData({
       minWriteHeight:windowInfo.windowHeight
+    })
+  },
+
+  bindTimeoutDate() {
+    this.setData({
+      date:formatDate(new Date(this.data.dateValue)),
+      time_out: new Date(this.data.date + ' ' + this.data.time + ':00').getTime()
+    })
+  },
+
+  createPack(e){
+
+    if(!this.data.title){
+      this.showToast('写个标题？')
+      return
+    }
+    if(!this.data.content){
+      this.showToast('写点内容？')
+      return
+    }
+    let gift = e.currentTarget.dataset.gift
+    const {title,content,time_out} = this.data
+    create({
+      title,
+      content,
+      time_out,
+      gift,
+      type:1
+    } as any).then(data=>{
+      const id = data.id
+      const time_out = data.time_out
+      const create_nick = data.create_nick
+      wx.navigateTo({
+        url: `../send/send`,
+        success:(res)=>{
+          res.eventChannel.emit('acceptSendData',{
+            id,time_out,gift,create_nick
+          })
+        }
+      })
+    }).catch(e=>{
+      this.showToast(e.message)
+    })
+
+
+
+  },
+
+  showToast(content:string){
+    wx.showToast({
+      title: content,
+      icon:'none'
     })
   },
 

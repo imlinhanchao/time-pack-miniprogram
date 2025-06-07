@@ -4,12 +4,12 @@
     <navigation-bar title="时间胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="white" background="#2487FF"></navigation-bar>
     <view class="title-container">
       <view class="title-box">
-        <input class="title-input" placeholder="标题"> </input>
+        <input class="title-input"   model:value="{{title}}" placeholder="标题" > </input>
       </view>
     </view>
   </view>
   <view class="write-box">
-    <textarea class="write-area" style="min-height: {{minWriteHeight}}px;" 	maxlength="-1" auto-height="true">
+    <textarea class="write-area" style="min-height: {{minWriteHeight}}px;" model:value="{{content}}" 	maxlength="-1" auto-height="true">
       </textarea>
       <view style="height:230rpx"></view>
   </view>
@@ -18,13 +18,13 @@
       <image src="../../assets/img/clock-blue.png" class="time-icon"></image>
       <text class="open-time-text">开启之时</text>
       <view style="flex:1"></view>
-      <picker mode="date">
+      <picker mode="date" model:value="{{dateValue}}"  start="{{today}}" bindchange="bindTimeoutDate">
         <view class="picker">
           {{date}}  
         </view>
       </picker>
-      <picker mode="time" style="margin-left: 20rpx;">
-        <view class="picker">
+      <picker mode="time" style="margin-left: 20rpx;" bindchange="bindTimeoutDate">
+        <view class="picker" model:value="{{time}}">
           {{time}}
           <image src="../../assets/img/arrow.png" class="arrow-icon" style="margin-left: 10rpx;"></image>
         </view>
@@ -32,13 +32,13 @@
     </view>
     <view class="line"></view>
     <view class="submit-btns">
-      <button form-type="gift" class="sendBtn">
+      <button form-type="gift" data-gift="{{true}}" class="sendBtn" bind:tap="createPack">
         <view class="btn-box">
           <image src="../../assets/img/gift.png" class="time-icon btn-icon"></image>
           赠送好友
         </view>
       </button>
-      <button form-type="submit" class="packBtn">
+      <button form-type="submit" class="packBtn" data-gift="{{false}}" bind:tap="createPack">
         <view class="btn-box">
           <image src="../../assets/img/pack.png" class="time-icon btn-icon"></image>
           封装胶囊

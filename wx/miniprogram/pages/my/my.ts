@@ -71,7 +71,7 @@ Page({
     });
   },
 
-  detached() {
+  onUnload() {
     if (this.data.timer) {
       clearInterval(this.data.timer);
     }
