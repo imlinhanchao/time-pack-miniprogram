@@ -46,16 +46,35 @@ Page({
     }
     let gift = e.currentTarget.dataset.gift
     const { title, content, time_out } = this.data
+    const reqData = {title, content, time_out,gift}
+    // 如果是送礼，并且没有头像 先去设置
+    if(gift && !app.globalData.userInfo?.nickname ){
+      wx.navigateTo({
+        url: `../setInfo/setInfo`,
+        events:{
+          setInfo:()=>{
+            // 设置头像成功了
+            this.createPackReq(reqData)
+          }
+        }
+      })
+      return
+    }
+    this.createPackReq(reqData)
+  },
 
-    wx.navigateTo({
-      url: `../send/send`,
-      success: (res) => {
-        res.eventChannel.emit('acceptSendData', {
-          title, content, time_out, gift
-        })
-      }
+  createPackReq(data){
+    create(data).then(res=>{
+      let {id,gift,time_out} = res
+      wx.navigateTo({
+        url: `../send/send`,
+        success: (res) => {
+          res.eventChannel.emit('acceptSendData', {
+            id,gift,time_out
+          })
+        }
+      })
     })
-
   },
 
   showToast(content: string) {

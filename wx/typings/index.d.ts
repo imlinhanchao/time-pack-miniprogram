@@ -4,6 +4,7 @@ interface IAppOption {
   globalData: {
     userInfo?: IAccount,
     apiUrl: string,
+    imgUrl:string,
   }
   userInfoReadyCallback?: WechatMiniprogram.GetUserInfoSuccessCallback,
 }

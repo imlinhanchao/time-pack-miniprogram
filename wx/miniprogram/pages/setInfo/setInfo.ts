@@ -12,7 +12,7 @@ Page({
       avatar:'',
       openid:''
     },
-    baseUrl:app.globalData.apiUrl,
+    imgUrl:app.globalData.imgUrl,
     tempAvatar: '',
     tempNick: ''
   },

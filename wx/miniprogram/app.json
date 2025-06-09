@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/setInfo/setInfo",
-    "pages/send/send",
-    "pages/home/home",
     "pages/receive/receive",
+    "pages/send/send",
+    "pages/setInfo/setInfo",
+    "pages/home/home",
     "pages/read/read",
     "pages/write/write",
     "pages/my/my",

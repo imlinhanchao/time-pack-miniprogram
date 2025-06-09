@@ -14,7 +14,7 @@
         <view>先设置头像昵称吧~</view>
         <view class="nick-box">
           <button class="head-box" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-            <image src="{{ tempAvatar ? baseUrl + tempAvatar :'../../assets/img/head_default.png'}}" style="width: 150rpx;height: 150rpx;"></image>
+            <image src="{{ tempAvatar ? imgUrl + tempAvatar :'../../assets/img/head_default.png'}}" style="width: 150rpx;height: 150rpx;"></image>
           </button>
           <input model:value="{{tempNick}}" type="nickname" class="nick-text" placeholder="昵称" />
           <button class="confirm-btn" bind:tap="onUpdateInfo">
