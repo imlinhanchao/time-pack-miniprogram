@@ -5,5 +5,5 @@ export function create(data: ICapsule) {
 }
 
 export function list(params: ICapsuleQuery) {
-  return Http.get<IPage<ICapsule>>('/list', params);
+  return Http.get<IPage<ICapsule>>('/capsule/list', params);
 }

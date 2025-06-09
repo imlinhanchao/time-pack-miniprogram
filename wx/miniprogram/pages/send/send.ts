@@ -1,3 +1,5 @@
+
+const app = getApp<IAppOption>();
 // pages/send/send.ts
 Page({
 
@@ -5,62 +7,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    packData: {
+      "title": "11111",
+      "content": "封存中...",
+      "time_out": 2064720972364,
+      "gift": true,
+    },
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.on("acceptSendData", data => {
+      this.setData({
+        packData: data,
+      })
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
+  
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage() {
 
-  }
+  },
+  showToast(content: string) {
+    wx.showToast({
+      title: content,
+      icon: 'none'
+    })
+  },
+
 })

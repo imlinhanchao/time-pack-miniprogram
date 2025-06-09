@@ -48,9 +48,9 @@ Page({
         ]
       }).catch((e: Error) => {
         wx.showToast({
-          title: '加载失败',
-          icon: 'error',
-          duration: 1000
+          title: e.message,
+          icon: 'none',
+          duration: 2000
         })
         this.setData({
           loading: false

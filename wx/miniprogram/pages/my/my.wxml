@@ -12,9 +12,13 @@
 
   <view class="container my-container">
     <pack-item class="capsule" wx:for="{{capsules}}" wx:for-index="idx" wx:key="unique" item="{{item}}" now="{{now}}" />
-    <view wx:if="{{capsules.length==0}}">
-      空空如也
+    <view wx:if="{{capsules.length==0}}" class="no-data-box" >
+      <image src="../../assets/img/no_data.png" class="no-data-image"></image>
+      <view>空空如也</view>
     </view>
-    <view wx:if="{{loading}}">加载中</view>
+    <view class="loading" wx:if="{{loading && capsules.length>0}}">
+      <image src="../../assets/img/timepill.gif" class="loading-image"></image>
+      别急，在加载了~
+    </view>
   </view>
 </view>

@@ -23,8 +23,8 @@
           {{date}}  
         </view>
       </picker>
-      <picker mode="time" style="margin-left: 20rpx;" bindchange="bindTimeoutDate">
-        <view class="picker" model:value="{{time}}">
+      <picker mode="time" style="margin-left: 20rpx;" bindchange="bindTimeoutDate" model:value="{{time}}">
+        <view class="picker" >
           {{time}}
           <image src="../../assets/img/arrow.png" class="arrow-icon" style="margin-left: 10rpx;"></image>
         </view>

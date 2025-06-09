@@ -7,3 +7,11 @@ export function login(data: ILoginWx) {
 export function refreshToken(refreshToken: string) {
   return Http.post<IAccount>('/account/refreshToken', { refreshToken });
 }
+
+export function updateUserInfo(data: any) {
+  return Http.post<IAccount>('/account/update',  data );
+}
+
+export function upload(data: any) {
+  return Http.post('/update',  data );
+}
