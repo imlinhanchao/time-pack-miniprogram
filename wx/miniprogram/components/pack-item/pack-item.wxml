@@ -1,6 +1,6 @@
 <!--components/pack-item/pack-item.wxml-->
 <view class="pack-item">
-  <view class="pack-header">
+  <view class="pack-header" wx:if="{{now > item.time_out}}">
     <text class="title">{{item.title}}</text>
     <text class="content">{{item.content}}</text>
   </view>
@@ -8,7 +8,7 @@
     <view class="time-text">还有
       <time-diff start="{{now}}" end="{{item.time_out}}" />开启
     </view>
-    <image src="../../assets/img/clock-blue.png" class="time-icon"></image>
+    <image src="{{item.gift? '../../assets/img/clock-red.png':'../../assets/img/clock-blue.png'}}" class="time-icon"></image>
   </view>
   <progress border-radius="16rpx" stroke-width="16rpx" class="time-progress" percent="30" activeColor="#2487FF"></progress>
   <view class="user-info">

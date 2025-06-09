@@ -1,4 +1,4 @@
-import { updateUserInfo,upload } from "../../api/account"
+import { updateUserInfo } from "../../api/account"
 const app = getApp<IAppOption>();
 // pages/send/send.ts
 Page({

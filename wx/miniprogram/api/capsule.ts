@@ -7,3 +7,7 @@ export function create(data: ICapsule) {
 export function list(params: ICapsuleQuery) {
   return Http.get<IPage<ICapsule>>('/capsule/list', params);
 }
+
+export function read(id:string) {
+  return Http.get<ICapsule>('/capsule/read/'+id,undefined);
+}

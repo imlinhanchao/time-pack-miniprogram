@@ -6,8 +6,8 @@
   <view class="receive-box">
     <view class="receive-info">
       <view class="send-user">
-        <image class="send-head"></image>
-        跳跳
+        <image class="send-head" src="{{imgUrl+packData.create_avatar}}"></image>
+        {{packData.create_nick}}
       </view>
       <view class="send-content">
         <view>赠送你</view>
@@ -20,10 +20,10 @@
             <view>开启时间</view>
           </view>
           <view class="open-time-text">
-            2023年10月1日 10点
+           {{openTime}}
           </view>
         </view>
-        <button class="receive-btn">
+        <button class="receive-btn" bind:tap="onReceivePack">
           收下了
         </button>
       </view>
