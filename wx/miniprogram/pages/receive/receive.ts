@@ -1,4 +1,4 @@
-import { read } from "../../api/capsule"
+import { update } from "../../api/capsule"
 const app = getApp<IAppOption>();
 import { formatDate } from "../../utils/date";
 // pages/receive/receive.ts
@@ -36,7 +36,11 @@ Page({
     if (!this.data.packData.id) {
       return this.showToast("没找到胶囊啊！")
     }
-    read(id).then(res => {
+    update({
+      id,
+      user:app.globalData.userInfo?.openid,
+      status:1,
+    }).then(res => {
       this.showToast('收下了~静待开启之日吧~')
       wx.redirectTo({
         url: '/pages/home/home'

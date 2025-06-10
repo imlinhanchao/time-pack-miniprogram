@@ -1,15 +1,6 @@
-type IDataType = {  }
-type TComponent = WechatMiniprogram.Component.Options<{}, {}, {}, { 
-  properties: {
-    item: ICapsule 
-  }
-}>
-Component<{}, {}, {}, {
-  properties: {
-    item: ICapsule,
-    now: number
-  }
-}>({
+import { ComponentWithComputed } from 'miniprogram-computed'
+const app = getApp<IAppOption>();
+ComponentWithComputed({
   behaviors: [],
   properties: {
     item: {
@@ -20,7 +11,23 @@ Component<{}, {}, {}, {
     }
   },
   data: {
+    userOpenId:app.globalData.userInfo?.openid
+  },
+  computed:{
+    currentProcess(data){
 
+    },
+    showStatusText(data){
+      if(data.item.status==0){
+        return "未被领取"
+      }else{
+        if(data.item.create_user != data.userOpenId){
+          return "赠送"
+        }else{
+          return "已领取"
+        }
+      }
+    }
   },
   lifetimes: {
     created() {

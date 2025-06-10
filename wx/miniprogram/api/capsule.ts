@@ -11,3 +11,7 @@ export function list(params: ICapsuleQuery) {
 export function read(id:string) {
   return Http.get<ICapsule>('/capsule/read/'+id,undefined);
 }
+
+export function update(data) {
+  return Http.post<ICapsule>('/capsule/update',data);
+}

@@ -64,6 +64,8 @@ Page({
     const timer = setInterval(() => {
       this.setData({
         now: new Date().getTime(),
+   
+        
       });
     }, 1000);
     this.setData({
