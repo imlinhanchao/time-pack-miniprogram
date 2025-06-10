@@ -1,6 +1,7 @@
 import { addTime, formatDate } from "../../utils/date";
 const DATE_FORMAT1 = 'YYYY-MM-DD';
 import { create } from "../../api/capsule"
+const app = getApp<IAppOption>();
 // pages/write/write.ts
 Page({
 
@@ -46,13 +47,13 @@ Page({
     }
     let gift = e.currentTarget.dataset.gift
     const { title, content, time_out } = this.data
-    const reqData = {title, content, time_out,gift}
+    const reqData = { title, content, time_out, gift }
     // 如果是送礼，并且没有头像 先去设置
-    if(gift && !app.globalData.userInfo?.nickname ){
+    if (gift && !app.globalData.userInfo?.nickname) {
       wx.navigateTo({
         url: `../setInfo/setInfo`,
-        events:{
-          setInfo:()=>{
+        events: {
+          setInfo: () => {
             // 设置头像成功了
             this.createPackReq(reqData)
           }
@@ -63,14 +64,27 @@ Page({
     this.createPackReq(reqData)
   },
 
-  createPackReq(data){
-    create(data).then(res=>{
-      let {id,gift,time_out} = res
+  createPackReq(data) {
+    create(data).then(res => {
+      let { id, gift, time_out } = res
       wx.navigateTo({
         url: `../send/send`,
+        events: {
+          clearData: (res) => {
+            this.setData({
+              dateValue: formatDate(addTime(new Date(), 10, 'year'), DATE_FORMAT1),
+              date: formatDate(addTime(new Date(), 10, 'year')),
+              time: formatDate(new Date(), 'HH:mm'),
+              title: '',
+              content: '',
+              time_out: addTime(new Date(), 10, 'year').getTime(),
+              today: formatDate(new Date(), DATE_FORMAT1),
+            })
+          },
+        },
         success: (res) => {
           res.eventChannel.emit('acceptSendData', {
-            id,gift,time_out
+            id, gift, time_out
           })
         }
       })

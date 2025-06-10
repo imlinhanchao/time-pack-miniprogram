@@ -106,17 +106,20 @@ Component({
       this.triggerEvent('back', { delta: data.delta }, {})
     },
     home() {
-      const data = this.data
-      if (data.delta) {
-        wx.navigateTo({
-          url: '../home/home',
-          delta: data.delta
-        })
-      }
-      wx.navigateTo({
+      wx.reLaunch({
         url: '../home/home',
-        delta: data.delta
       })
+      // const data = this.data
+      // if (data.delta) {
+      //   wx.navigateTo({
+      //     url: '../home/home',
+      //     delta: data.delta
+      //   })
+      // }
+      // wx.navigateTo({
+      //   url: '../home/home',
+      //   delta: data.delta
+      // })
     }
   },
 })

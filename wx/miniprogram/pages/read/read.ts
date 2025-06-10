@@ -1,18 +1,34 @@
 // pages/read/read.ts
+import { read } from "../../api/capsule"
+const app = getApp<IAppOption>();
+import {  formatDate } from "../../utils/date";
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    packData:{},
+    imgUrl:app.globalData.imgUrl,
+    openTime:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
-
+  onLoad(option) {
+    let id = option.query.id
+    read(id).then(res=>{
+      this.setData({
+        packData:res,
+        openTime: formatDate(res.time_out,'YYYY年MM月DD日 HH点')
+      })
+    }).catch(e=>{
+      wx.showToast({
+        title:e.message||'读取胶囊失败了~T_T',
+        icon:'none'
+      })
+    })
   },
 
   /**

@@ -10,8 +10,8 @@
         时间胶囊
       </view>
       <view class="send-content">
-        <view>已封装</view>
-        <view>右上角转发给好友吧！</view>
+        <view>已封装！</view>
+        <view>{{packData.gift ?'右上角转发给好友吧！':'开启之日再见！'}}</view>
       </view>
       <view class="open-time">
         <view class="open-time-box">
