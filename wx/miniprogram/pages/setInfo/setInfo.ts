@@ -72,6 +72,7 @@ Page({
       // 设置信息成功返回
       const eventChannel = this.getOpenerEventChannel()
       eventChannel.emit('setInfo', {success: true});
+      wx.navigateBack()
     }).catch(e=>{
       this.showToast(e.message || "设置失败了")
     })

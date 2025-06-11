@@ -17,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(option) {
-    let id = option.query.id
+    let id = option.id
     read(id).then(res=>{
       this.setData({
         packData:res,

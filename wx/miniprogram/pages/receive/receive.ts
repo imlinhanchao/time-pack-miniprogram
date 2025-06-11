@@ -1,4 +1,4 @@
-import { update } from "../../api/capsule"
+import { update,read } from "../../api/capsule"
 const app = getApp<IAppOption>();
 import { formatDate } from "../../utils/date";
 // pages/receive/receive.ts
@@ -17,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(option) {
-    let id = option.query.id
+    let id = option.id
     if (!id) {
       return this.showToast('没找到胶囊哦~0.0')
     }
@@ -37,14 +37,17 @@ Page({
       return this.showToast("没找到胶囊啊！")
     }
     update({
-      id,
+      id:this.data.packData.id,
       user:app.globalData.userInfo?.openid,
       status:1,
     }).then(res => {
       this.showToast('收下了~静待开启之日吧~')
-      wx.redirectTo({
-        url: '/pages/home/home'
-      })
+      setTimeout(()=>{
+        wx.redirectTo({
+          url: '/pages/home/home'
+        })
+      },3000)
+ 
     }).catch(e => {
       this.showToast(e.message || '接收胶囊出错了T_T')
     })

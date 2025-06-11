@@ -49,6 +49,8 @@ Page({
     const { title, content, time_out } = this.data
     const reqData = { title, content, time_out, gift }
     // 如果是送礼，并且没有头像 先去设置
+ console.log(app.globalData.userInfo);
+ 
     if (gift && !app.globalData.userInfo?.nickname) {
       wx.navigateTo({
         url: `../setInfo/setInfo`,
