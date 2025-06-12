@@ -71,7 +71,7 @@ ComponentWithComputed({
     },
     goToDetail(){
       wx.navigateTo({
-        url:'pages/read/read?id='+this.data.item.id
+        url:'/pages/read/read?id='+this.data.item.id
       })
     },
 

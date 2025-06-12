@@ -46,8 +46,7 @@ Page({
         wx.redirectTo({
           url: '/pages/home/home'
         })
-      },3000)
- 
+      },1500)
     }).catch(e => {
       this.showToast(e.message || '接收胶囊出错了T_T')
     })

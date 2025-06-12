@@ -2,7 +2,7 @@
 <view class="pack-item" bind:tap="openPack">
   <view class="pack-header" wx:if="{{item.status==2}}">
     <text class="title" wx:if="{{item.status==2}}">{{item.title}}</text>
-    <text class="content" wx:if="{{item.status==2}}">{{item.content}}</text>
+    <div class="content" wx:if="{{item.status==2}}">{{item.content}}</div>
   </view>
   <view class="time" wx:if="{{item.status==0||item.status==1 }}">
     <view class="time-text" wx:if="{{now<item.time_out}}">还有

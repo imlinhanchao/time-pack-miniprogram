@@ -1,5 +1,5 @@
 // pages/read/read.ts
-import { read } from "../../api/capsule"
+import { open } from "../../api/capsule"
 const app = getApp<IAppOption>();
 import {  formatDate } from "../../utils/date";
 Page({
@@ -18,7 +18,7 @@ Page({
    */
   onLoad(option) {
     let id = option.id
-    read(id).then(res=>{
+    open(id).then(res=>{
       this.setData({
         packData:res,
         openTime: formatDate(res.time_out,'YYYY年MM月DD日 HH点')

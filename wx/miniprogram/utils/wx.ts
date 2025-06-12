@@ -14,7 +14,7 @@ export function wxlogin(app: WechatMiniprogram.App.Instance<IAppOption>) {
         wx.setStorageSync('user', userInfo)
       } catch (error) {}
     }
-    if (userInfo) {
+    if (userInfo?.openid) {
       app.globalData.userInfo = userInfo;
       return resolve(app.globalData.userInfo);
     }

@@ -5,9 +5,7 @@
   </view>
 
   <view class="container read-container">
-    <view class="content">
-      {{packData.content}}
-    </view>
+    <text class="content"> {{packData.content}}</text>
   </view>
   <view class="bottom-info">
     <view class="user-info">
