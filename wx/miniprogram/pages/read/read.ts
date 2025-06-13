@@ -18,12 +18,15 @@ Page({
    */
   onLoad(option) {
     let id = option.id
+    this.selectComponent("#loading").show({title:'正在读取'});
     open(id).then(res=>{
+      this.selectComponent("#loading").hide();
       this.setData({
         packData:res,
-        openTime: formatDate(res.time_out,'YYYY年MM月DD日 HH点')
+        openTime: formatDate(res.create_time,'YYYY年MM月DD日 HH点')
       })
     }).catch(e=>{
+      this.selectComponent("#loading").hide();
       wx.showToast({
         title:e.message||'读取胶囊失败了~T_T',
         icon:'none'

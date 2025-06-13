@@ -49,8 +49,8 @@ Page({
     const { title, content, time_out } = this.data
     const reqData = { title, content, time_out, gift }
     // 如果是送礼，并且没有头像 先去设置
- console.log(app.globalData.userInfo);
- 
+    console.log(app.globalData.userInfo);
+
     if (gift && !app.globalData.userInfo?.nickname) {
       wx.navigateTo({
         url: `../setInfo/setInfo`,
@@ -67,7 +67,11 @@ Page({
   },
 
   createPackReq(data) {
+
+    this.selectComponent("#loading").show({title:'正在封装'});
     create(data).then(res => {
+
+      this.selectComponent("#loading").hide();
       let { id, gift, time_out } = res
       wx.navigateTo({
         url: `../send/send`,
@@ -90,6 +94,10 @@ Page({
           })
         }
       })
+    }).catch(err => {
+
+      this.selectComponent("#loading").hide();
+      this.showToast(err.message || "封装失败了T_T~")
     })
   },
 

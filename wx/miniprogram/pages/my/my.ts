@@ -24,6 +24,7 @@ Page({
     },
     getList(index:number) {
       if (this.data.loading) {
+        wx.stopPullDownRefresh()
         return
       }
       this.setData({
@@ -33,6 +34,7 @@ Page({
         title: this.data.title,
         index
       }).then(({ list, total }) => {
+        wx.stopPullDownRefresh()
         if (index == 0) {
           this.setData({
             capsules: list,
@@ -47,6 +49,7 @@ Page({
           })
         ]
       }).catch((e: Error) => {
+        wx.stopPullDownRefresh()
         wx.showToast({
           title: e.message,
           icon: 'none',
@@ -64,8 +67,6 @@ Page({
     const timer = setInterval(() => {
       this.setData({
         now: new Date().getTime(),
-   
-        
       });
     }, 1000);
     this.setData({
@@ -88,4 +89,7 @@ Page({
     }
     this.getList(this.data.capsules.length)
   },
+  onPullDownRefresh(){
+    this.getList(0);
+  }
 })

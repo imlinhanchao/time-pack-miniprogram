@@ -17,7 +17,8 @@
     </view>
     <view class="pack-time">
       封装时间
-      <text class="pack-time-text">{{oepnTime}}</text>
+      <text class="pack-time-text">{{openTime}}</text>
     </view>
   </view>
+  <pack-loading  id="loading"></pack-loading>
 </view>

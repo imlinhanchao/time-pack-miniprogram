@@ -57,11 +57,13 @@ Page({
     if (!tempNick) {
       return this.showToast("设置个昵称？")
     }
+    this.selectComponent("#loading").show({title:'正在更新信息'});
     updateUserInfo({
       openid: app.globalData.userInfo?.openid,
       nickname: tempNick,
       avatar:tempAvatar
     }).then(e=>{
+      this.selectComponent("#loading").hide();
       let userInfo = {...this.data.userInfo}
       userInfo.nickname = tempNick
       userInfo.avatar = tempAvatar
@@ -74,6 +76,7 @@ Page({
       eventChannel.emit('setInfo', {success: true});
       wx.navigateBack()
     }).catch(e=>{
+      this.selectComponent("#loading").hide();
       this.showToast(e.message || "设置失败了")
     })
   },

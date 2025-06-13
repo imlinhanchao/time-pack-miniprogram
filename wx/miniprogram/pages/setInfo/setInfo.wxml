@@ -29,4 +29,5 @@
       不想送了 >
     </view>
   </view>
+  <pack-loading  id="loading"></pack-loading>
 </view>

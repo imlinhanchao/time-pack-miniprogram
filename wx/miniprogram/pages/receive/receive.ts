@@ -22,13 +22,16 @@ Page({
     if (!id) {
       return this.showToast('没找到胶囊哦~0.0')
     }
+    this.selectComponent("#loading").show({title:'正在读取胶囊'});
     read(id).then(res => {
+      this.selectComponent("#loading").hide();
       this.setData({
         packData: res,
         isSelfCreate:res.create_user == app.globalData.userInfo?.openid,
         openTime: formatDate(res.time_out, 'YYYY年MM月DD日 HH点')
       })
     }).catch(e => {
+      this.selectComponent("#loading").hide();
       this.showToast(e.message || '查询胶囊出错了T_T')
     })
   },
@@ -38,11 +41,13 @@ Page({
     if (!this.data.packData.id) {
       return this.showToast("没找到胶囊啊！")
     }
+    this.selectComponent("#loading").show({title:'正在接收胶囊'});
     update({
       id:this.data.packData.id,
       user:app.globalData.userInfo?.openid,
       status:1,
     }).then(res => {
+      this.selectComponent("#loading").hide();
       this.showToast('收下了~静待开启之日吧~')
       setTimeout(()=>{
         wx.redirectTo({
@@ -50,6 +55,7 @@ Page({
         })
       },1500)
     }).catch(e => {
+      this.selectComponent("#loading").hide();
       this.showToast(e.message || '接收胶囊出错了T_T')
     })
   },

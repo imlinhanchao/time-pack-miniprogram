@@ -50,4 +50,5 @@
       </view>
     </view>
   </view>
+  <pack-loading  id="loading"></pack-loading>
 </view>

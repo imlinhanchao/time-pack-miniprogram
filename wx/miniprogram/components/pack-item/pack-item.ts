@@ -57,6 +57,9 @@ ComponentWithComputed({
         if(this.data.now >= this.data.item.time_out){
           // 到时间了
           open(this.data.item.id).then(res=>{
+            this.setData({
+              item:res
+            })
             this.goToDetail()
           }).catch(e=>{
             this.showToast(e.message || "打开出错了，待会再试试吧~")
