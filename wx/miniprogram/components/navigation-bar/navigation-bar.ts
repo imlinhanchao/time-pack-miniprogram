@@ -66,18 +66,12 @@ Component({
       const rect = wx.getMenuButtonBoundingClientRect()
       wx.getSystemInfo({
         success: (res) => {
-          console.log(res,"222");
-          wx.showToast({
-            title:JSON.stringify(res),
-            icon:'none'
-          })
           const isAndroid = res.platform === 'android'
-          const isDevtools = res.platform === 'devtools'
           this.setData({
             ios: !isAndroid,
             innerPaddingRight: `padding-right: ${res.windowWidth - rect.left}px`,
-            leftWidth: `width: ${res.windowWidth - rect.left }px`,
-            safeAreaTop: isDevtools || isAndroid ? `height: calc(var(--height) + ${res.safeArea.top}px); padding-top: ${res.safeArea.top}px` : ``
+            leftWidth: `width: ${rect.width }px; height: ${rect.height}px;margin-left:${res.windowWidth - rect.right}px`,
+            safeAreaTop:  `height:  ${rect.top+rect.height}px; padding-top: ${rect.top}px` 
           })
         },
         fail:(err)=>{

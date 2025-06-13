@@ -1,9 +1,9 @@
 <!--pages/receive/receive.wxml-->
 <view class="receive-container">
   <view class="top-container">
-    <navigation-bar title="接收胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="black" background="#FFF"></navigation-bar>
+    <navigation-bar title="接收胶囊" back="{{false}}" showLogo="{{false}}" homeButton="{{true}}" color="black" background="#FFF"></navigation-bar>
   </view>
-  <view class="receive-box">
+  <view class="receive-box" wx:if="{{!isSelfCreate}}">
     <view class="receive-info">
       <view class="send-user">
         <image class="send-head" src="{{imgUrl+packData.create_avatar}}"></image>
@@ -27,10 +27,27 @@
           收下了
         </button>
       </view>
-
-
     </view>
-
   </view>
-
+  <view class="send-box" wx:else>
+    <view class="send-info">
+      <view class="send-title">
+        <image src="{{packData.gift ? '../../assets/img/red-pack.png' : '../../assets/img/blue-pack.png' }}" class="send-icon"></image>
+        时间胶囊
+      </view>
+      <view class="send-content">
+        <view>已封装！</view>
+        <view>{{packData.gift ?'右上角转发给好友吧！':'开启之日再见！'}}</view>
+      </view>
+      <view class="send-open-time">
+        <view class="send-open-time-box">
+          <image src="{{packData.gift  ? '../../assets/img/clock-red.png':'../../assets/img/clock-blue.png'}}" class="send-open-time-icon"></image>
+          <view>开启时间</view>
+        </view>
+        <view class="send-open-time-text">
+          {{openTime}}
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

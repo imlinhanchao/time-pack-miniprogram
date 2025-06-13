@@ -9,6 +9,7 @@ Page({
    */
   data: {
     packData: {},
+    isSelfCreate:true,
     imgUrl: app.globalData.imgUrl,
     openTime: '',
   },
@@ -24,6 +25,7 @@ Page({
     read(id).then(res => {
       this.setData({
         packData: res,
+        isSelfCreate:res.create_user == app.globalData.userInfo?.openid,
         openTime: formatDate(res.time_out, 'YYYY年MM月DD日 HH点')
       })
     }).catch(e => {
@@ -50,6 +52,14 @@ Page({
     }).catch(e => {
       this.showToast(e.message || '接收胶囊出错了T_T')
     })
+  },
+
+
+  onShareAppMessage() {
+    return {
+      title:'赠送你一个时间胶囊',
+      path:'/pages/receive/receive?id='+this.data.packData.id
+    }
   },
 
 
