@@ -12,6 +12,7 @@ Page({
     isSelfCreate:true,
     imgUrl: app.globalData.imgUrl,
     openTime: '',
+    showNoPermisson:false
   },
 
   /**
@@ -32,7 +33,13 @@ Page({
       })
     }).catch(e => {
       this.selectComponent("#loading").hide();
-      this.showToast(e.message || '查询胶囊出错了T_T')
+      if(e.message=="权限不足"){
+        this.setData({
+          showNoPermisson:true
+        })
+      }else{
+        this.showToast(e.message || '查询胶囊出错了T_T')
+      }
     })
   },
 

@@ -35,12 +35,16 @@
         <image src="{{packData.gift ? '../../assets/img/red-pack.png' : '../../assets/img/blue-pack.png' }}" class="send-icon"></image>
         时间胶囊
       </view>
-      <view class="send-content">
+      <view class="send-content" wx:if="{{!showNoPermisson}}">
         <view>已封装！</view>
         <view>{{packData.gift ?'右上角转发给好友吧！':'开启之日再见！'}}</view>
       </view>
+      <view class="send-content" wx:else>
+        <view>哎呀！</view>
+        <view>这是一个私有胶囊！</view>
+      </view>
       <view class="send-open-time">
-        <view class="send-open-time-box">
+        <view class="send-open-time-box" wx:if="{{!showNoPermisson}}">
           <image src="{{packData.gift  ? '../../assets/img/clock-red.png':'../../assets/img/clock-blue.png'}}" class="send-open-time-icon"></image>
           <view>开启时间</view>
         </view>
