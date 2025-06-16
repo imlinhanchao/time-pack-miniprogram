@@ -130,7 +130,10 @@ class App {
     // 生成查询条件
     const q: any = { where: {}, order: [], limit: 10 };
     data.query = App.filter(data.query, keys);
-    q.where = App.where(data.query, ops);
+    q.where = {
+      ...data.where,
+      ...App.where(data.query, ops),
+    };
 
     // 生成排序，默认以创建时间降序
     data.order = data.order || [];

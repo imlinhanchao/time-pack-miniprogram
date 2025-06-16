@@ -1,4 +1,5 @@
-import AccountApp from "./account";
+import { Op } from "sequelize";
+import AccountApp, { IAccount } from "./account";
 import App from "./app";
 import model from "@/model";
 const Capsule = model.capsule;
@@ -19,6 +20,8 @@ export interface ICapsule {
 const __error__ = Object.assign(
   {
     nottime: App.error.reg("还没到时间"),
+    notfound: App.error.reg("胶囊不存在"),
+    limited: App.error.reg("你还不能打开胶囊"),
   },
   App.error
 );
@@ -32,7 +35,7 @@ class CapsuleApp extends App {
     ]);
     this.session = session;
     this.name = "胶囊";
-    this.saftKey = ["id"].concat(Capsule.keys);
+    this.saftKey = ["id", "create_time", "update_time"].concat(Capsule.keys);
     this.account = new AccountApp(session);
   }
 
@@ -43,7 +46,15 @@ class CapsuleApp extends App {
   async create(data: ICapsule, onlyData = false) {
     const keys = Capsule.keys;
 
-    data.create_user = this.account.user.openid;
+    const creator = await this.account.info(true) as IAccount;
+
+    data.user = '';
+    data.status = !data.gift ? 1 : 0; // 如果不是礼物，则状态为1（已封存），否则为0（待领取）
+    data.type = data.type || 1; // 默认类型为1
+    data.create_nick = creator.nickname;
+    data.create_avatar = creator.avatar;
+    data.create_user = creator.openid!;
+
     if (!App.haskeys(data, keys)) {
       throw this.error.param;
     }
@@ -100,11 +111,11 @@ class CapsuleApp extends App {
           id
         }
       })).dataValues;
-      if (account.openid != capsule?.user || !capsule?.user) {
+      if (account.openid != capsule?.user && capsule?.user) {
         throw this.error.limited;
       }
 
-      if (capsule.time_out < new Date().valueOf()) {
+      if (capsule.time_out < Date.now()) {
         capsule.content = '封存中...';
       }
 
@@ -117,7 +128,7 @@ class CapsuleApp extends App {
     }
   }
 
-  async open(id: string, onlyData=false) {
+  async open({ id }: { id: string }, onlyData=false) {
     try {
       const account = this.account.user as any;
       let capsule = await Capsule.findOne({
@@ -125,16 +136,29 @@ class CapsuleApp extends App {
           id
         }
       });
-      if (account.openid != capsule?.user || !capsule?.user) {
+
+      if (!capsule) {
+        throw this.error.notfound;
+      }
+
+      if (!capsule.user && capsule?.create_user != account.openid) {
+        throw this.error.limited;
+      } else if (capsule.user && account.openid != capsule.user && capsule?.create_user != account.openid) {
         throw this.error.limited;
       }
 
-      if (capsule.time_out < new Date().valueOf()) {
+      if (capsule.time_out > Date.now()) {
         throw this.error.nottime;
       }
 
-      capsule.status = 2;
-      capsule.save();
+      if (capsule.user && account.openid != capsule.user && capsule.status == 1) {
+        throw this.error.limited;
+      }
+
+      if (capsule.status != 2 && (!capsule.user || capsule.user == account.openid)) {
+        capsule.status = 2;
+        await capsule.save();
+      }
 
       if (onlyData) return capsule;
       
@@ -153,19 +177,20 @@ class CapsuleApp extends App {
     const query = App.filter(data.query || data, Object.keys(ops));
 
     try {
-      if (data.tab != 'gift') {
-        query.user = (await new AccountApp(this.session).user.openid);
-      } else {
-        query.create_user = (new AccountApp(this.session).user.openid);
-        query.gift = true;
-      }
+      const where = {
+          [Op.or]: [
+            { user: (await new AccountApp(this.session).user.openid) },
+            { create_user: (new AccountApp(this.session).user.openid) }
+          ],
+      };
 
       data = {
         index: data.index || 0,
         count: data.count || 20,
         fields: data.fields ? data.fields.split(',') : this.saftKey,
+        where,
         ...data,
-        query
+        ...query
       };
 
       const queryData = await super.query(data, Capsule, ops);

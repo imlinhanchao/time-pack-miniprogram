@@ -13,7 +13,7 @@ const __salt = config.salt;
 
 const __error__ = Object.assign(
   {
-    verify: App.error.reg("帐号或密码错误！"),
+    verify: App.error.reg("账号验证失败！"),
     captcha: App.error.reg("验证码错误！"),
     existed: App.error.existed("帐号"),
     existedmail: App.error.existed("邮箱"),
@@ -126,6 +126,9 @@ class AccountApp extends App {
 
     try {
       const wx = await wxapi.login(data.code);
+      if (!wx?.openid || !wx?.session_key) {
+        throw this.error.verify;
+      }
       let account = await this.exist(wx.openid, true);
       if (!account) {
         await this.create({
@@ -220,10 +223,9 @@ class AccountApp extends App {
         throw this.error.limited;
       }
       // 用户名不可更改
-      data.openid = undefined;
       data.session_key = undefined;
       return this.ok.update(
-        App.filter(await super.set(data, Account), this.saftKey)
+        App.filter(await super.set(data, Account, undefined, 'openid'), this.saftKey)
       );
     } catch (err: any) {
       if (err.isdefine) throw err;
@@ -255,7 +257,7 @@ class AccountApp extends App {
   }
 
   get islogin() {
-    return this.session && this.session.account_login;
+    return this.session && this.session.account_login?.openid;
   }
   
   async info(onlyData = false, fields?: string[]) {

@@ -35,11 +35,16 @@ class Lib extends App {
         const filename = hash + path.extname(reqFiles[i].originalname);
         const savepath = path.join(dirpath, filename);
         if (!files.exists(savepath)) fs.writeFileSync(savepath, data);
-        filenames.push(filename);
+        filenames.push({
+          url: path.join(filecfg.fileurl, filename),
+          originalname: reqFiles[i].originalname,
+          filename
+        });
       }
       return this.ok.upload(filenames);
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 }
