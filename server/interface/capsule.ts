@@ -21,7 +21,8 @@ const __error__ = Object.assign(
   {
     nottime: App.error.reg("还没到时间"),
     notfound: App.error.reg("胶囊不存在"),
-    limited: App.error.reg("你还不能打开胶囊"),
+    notyours: App.error.reg("这不是你的胶囊"),
+    canopen: App.error.reg("你还不能打开胶囊"),
   },
   App.error
 );
@@ -88,7 +89,7 @@ class CapsuleApp extends App {
       const account = this.account.user;
       let capsule = await this.read(data.id!, true);
       if (account.openid != capsule.user && capsule.user || capsule.status !== 0) {
-        throw this.error.limited;
+        throw this.error.notyours;
       }
       
       capsule = await super.set(data, Capsule)
@@ -112,7 +113,7 @@ class CapsuleApp extends App {
         }
       })).dataValues;
       if (account.openid != capsule?.user && capsule?.user) {
-        throw this.error.limited;
+        throw this.error.notyours;
       }
 
       if (capsule.time_out < Date.now()) {
@@ -142,9 +143,9 @@ class CapsuleApp extends App {
       }
 
       if (!capsule.user && capsule?.create_user != account.openid) {
-        throw this.error.limited;
+        throw this.error.notyours;
       } else if (capsule.user && account.openid != capsule.user && capsule?.create_user != account.openid) {
-        throw this.error.limited;
+        throw this.error.notyours;
       }
 
       if (capsule.time_out > Date.now()) {
@@ -152,7 +153,7 @@ class CapsuleApp extends App {
       }
 
       if (capsule.user && account.openid != capsule.user && capsule.status == 1) {
-        throw this.error.limited;
+        throw this.error.canopen;
       }
 
       if (capsule.status != 2 && (!capsule.user || capsule.user == account.openid)) {
