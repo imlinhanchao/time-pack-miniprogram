@@ -38,6 +38,7 @@ Page({
   onShareAppMessage() {
     return {
       title:'赠送你一个时间胶囊',
+      imageUrl:'../../assets/img/share1.jpg',
       path:'/pages/receive/receive?id='+this.data.packData.id
     }
   },

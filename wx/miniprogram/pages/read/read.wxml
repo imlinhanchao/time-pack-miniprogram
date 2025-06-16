@@ -12,7 +12,7 @@
       <image class="head-image" src="{{imgUrl + packData.create_avatar}}"></image>
       <view class="user-name">
         {{ packData.create_nick }}
-        <text class="send-text" wx:if="{{packData.gift}}">赠送</text>
+        <text class="send-text" wx:if="{{packData.gift && openid != packData.create_user}}">赠送</text>
       </view>
     </view>
     <view class="pack-time">

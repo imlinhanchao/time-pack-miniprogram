@@ -64,12 +64,13 @@ Page({
       avatar:tempAvatar
     }).then(e=>{
       this.selectComponent("#loading").hide();
-      let userInfo = {...this.data.userInfo}
+      let userInfo = app.globalData.userInfo
       userInfo.nickname = tempNick
       userInfo.avatar = tempAvatar
       this.setData({
         userInfo
       })
+      wx.setStorageSync('user', userInfo)
       app.globalData.userInfo = userInfo
       // 设置信息成功返回
       const eventChannel = this.getOpenerEventChannel()

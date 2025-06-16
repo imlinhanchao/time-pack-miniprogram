@@ -1,6 +1,7 @@
 import { update,read } from "../../api/capsule"
 const app = getApp<IAppOption>();
 import { formatDate } from "../../utils/date";
+import { wxlogin } from "../../utils/wx";
 // pages/receive/receive.ts
 Page({
 
@@ -18,13 +19,27 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(option) {
+  async onLoad(option) {
     let id = option.id
     if (!id) {
       return this.showToast('没找到胶囊哦~0.0')
     }
     this.selectComponent("#loading").show({title:'正在读取胶囊'});
+    try{
+      if(!app.globalData.userInfo?.openid){
+        await wxlogin(app)
+      }
+    }catch(e){
+      this.selectComponent("#loading").hide();
+    }
+    this.getPackInfo(id)
+  },
+
+  getPackInfo(id){   
+    
     read(id).then(res => {
+      console.log(res);
+      
       this.selectComponent("#loading").hide();
       this.setData({
         packData: res,
@@ -42,6 +57,8 @@ Page({
       }
     })
   },
+
+
 
   //接收胶囊
   onReceivePack() {
@@ -71,6 +88,7 @@ Page({
   onShareAppMessage() {
     return {
       title:'赠送你一个时间胶囊',
+      imageUrl:'../../assets/img/share1.jpg',
       path:'/pages/receive/receive?id='+this.data.packData.id
     }
   },

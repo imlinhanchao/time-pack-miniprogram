@@ -11,6 +11,7 @@ Page({
     packData:{},
     imgUrl:app.globalData.imgUrl,
     openTime:'',
+    openid:app.globalData.userInfo?.openid
   },
 
   /**

@@ -6,7 +6,7 @@ App<IAppOption>({
     apiUrl: `https://time.net.librejo.cn/api`,
     imgUrl: `https://time.net.librejo.cn`,
   },
-  onShow() {
+  onShow(){
     wxlogin(this);
-  },
+  }
 })

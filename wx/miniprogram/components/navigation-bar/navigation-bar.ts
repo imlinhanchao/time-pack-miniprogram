@@ -14,6 +14,10 @@ Component({
       type: String,
       value: ''
     },
+    showLeft:{
+      type: Boolean,
+      value: true
+    },
     showLogo: {
       type: Boolean,
       value: true
@@ -67,10 +71,14 @@ Component({
       wx.getSystemInfo({
         success: (res) => {
           const isAndroid = res.platform === 'android'
+          let leftWidthStr = `width: ${rect.width }px; height: ${rect.height}px;margin-left:${res.windowWidth - rect.right}px;`
+          if(!this.data.showLeft){
+            leftWidthStr += 'background-color:#ffffff00 !important;'
+          }
           this.setData({
             ios: !isAndroid,
             innerPaddingRight: `padding-right: ${res.windowWidth - rect.left}px`,
-            leftWidth: `width: ${rect.width }px; height: ${rect.height}px;margin-left:${res.windowWidth - rect.right}px`,
+            leftWidth: leftWidthStr,
             safeAreaTop:  `height:  ${rect.top+rect.height}px; padding-top: ${rect.top}px` 
           })
         },

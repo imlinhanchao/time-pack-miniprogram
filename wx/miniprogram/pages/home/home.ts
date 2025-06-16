@@ -2,6 +2,7 @@
 // 获取应用实例
 const app = getApp<IAppOption>()
 const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
+import { wxlogin } from "../../utils/wx";
 
 Component({
   data: {
@@ -16,12 +17,18 @@ Component({
   },
   methods: {
     // 事件处理函数
-    createCapsule() {
+    async createCapsule() {
+      if(!app.globalData.userInfo?.openid){
+        await wxlogin(app)
+      }
       wx.navigateTo({
         url: '../write/write',
       })
     },
-    openCapsules() {
+    async openCapsules() {
+      if(!app.globalData.userInfo?.openid){
+        await wxlogin(app)
+      }
       wx.navigateTo({
         url: '../my/my',
       })
