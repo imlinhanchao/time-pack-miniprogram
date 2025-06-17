@@ -18,6 +18,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(option) {
+    const rect = wx.getMenuButtonBoundingClientRect()
+    wx.getSystemInfo({
+      success: (res) => {
+        this.setData({
+          leftWidth: `width: ${rect.width }px; height: ${rect.height}px;margin-left:${res.windowWidth - rect.right}px;top:${rect.top}px`,
+        })
+      },
+      fail:(err)=>{
+
+      }
+    })
+
+
+
+
     let id = option.id
     this.selectComponent("#loading").show({title:'正在读取'});
     open(id).then(res=>{
@@ -32,6 +47,17 @@ Page({
         title:e.message||'读取胶囊失败了~T_T',
         icon:'none'
       })
+    })
+  },
+
+
+  back(){
+    wx.navigateBack()
+  },
+
+  home(){
+    wx.reLaunch({
+      url: '../home/home',
     })
   },
 
