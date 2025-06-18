@@ -3,8 +3,8 @@ import { wxlogin } from "./utils/wx";
 // app.ts
 App<IAppOption>({
   globalData: {
-    apiUrl: `https://time.net.librejo.cn/api`,
-    imgUrl: `https://time.net.librejo.cn`,
+    apiUrl: `https://time-pack.com/api`,
+    imgUrl: `https://time-pack.com`,
   },
   onShow(){
     wxlogin(this);
