@@ -12,7 +12,7 @@ router.use("/account", loader(modules.account));
 router.use("/capsule", loader(modules.capsule));
 
 router.get("/", function (req, res) {
-  res.render("index", { title: "API" });
+  res.redirect('http://doc.time-pack.com');
 });
 
 export default router;
