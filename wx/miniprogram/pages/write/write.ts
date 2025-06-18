@@ -24,18 +24,6 @@ Page({
    */
   onLoad() {
     const windowInfo = wx.getWindowInfo()
-    const rect = wx.getMenuButtonBoundingClientRect()
-    wx.getSystemInfo({
-      success: (res) => {
-        this.setData({
-          leftWidth: `width: ${rect.width }px; height: ${rect.height}px;margin-left:${res.windowWidth - rect.right}px;top:${rect.top}px`,
-        })
-      },
-      fail:(err)=>{
-
-      }
-    })
-
     this.setData({
       minWriteHeight: windowInfo.windowHeight
     })
@@ -77,17 +65,7 @@ Page({
     }
     this.createPackReq(reqData)
   },
-
-  back(){
-    wx.navigateBack()
-  },
-
-  home(){
-    wx.reLaunch({
-      url: '../home/home',
-    })
-  },
-
+  
   createPackReq(data) {
 
     this.selectComponent("#loading").show({title:'正在封装'});
