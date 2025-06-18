@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "time-diff": "/components/time-diff/time-diff",
+    "time-item": "/components/time-item/time-item",
+    "pack-item":"/components/pack-item/pack-item"
+  },
+  "enablePullDownRefresh":true
+}

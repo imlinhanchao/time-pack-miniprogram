@@ -1,0 +1,23 @@
+<!--components/pack-item/pack-item.wxml-->
+<view class="pack-item" bind:tap="openPack">
+  <view class="pack-header" wx:if="{{item.status==2}}">
+    <text class="title" wx:if="{{item.status==2}}">{{item.title}}</text>
+    <div class="content" wx:if="{{item.status==2}}">{{item.content}}</div>
+  </view>
+  <view class="time" wx:if="{{item.status==0||item.status==1 }}">
+    <view class="time-text" wx:if="{{now<item.time_out}}">还有
+      <time-diff start="{{now}}" end="{{item.time_out}}" />开启
+    </view>
+    <view class="time-text" wx:else>待开启</view>
+    <image src="{{item.gift? '../../assets/img/clock-red.png':'../../assets/img/clock-blue.png'}}" class="time-icon"></image>
+  </view>
+  <progress wx:if="{{item.status!=2}}" border-radius="16rpx" stroke-width="16rpx" class="time-progress" percent="{{currentProcess}}" activeColor="#2487FF"></progress>
+  <view class="user-info">
+    <image class="user-head" wx:if="{{item.gift && item.create_user!=userOpenId}}" src="{{imgUrl + item.create_avatar}}"></image>
+    <view class="user-detail">
+      <text class="user-name" wx:if="{{item.gift && item.create_user!=userOpenId}}">{{item.create_nick}}</text>
+      <text class="pack-status" wx:if="{{item.gift}}">{{ showStatusText }}</text>
+    </view>
+  </view>
+  <view class="bottom-line"></view>
+</view>

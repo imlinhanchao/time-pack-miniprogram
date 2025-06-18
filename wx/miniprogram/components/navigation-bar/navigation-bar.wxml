@@ -1,5 +1,5 @@
 <view class="weui-navigation-bar {{extClass}}">
-  <view class="weui-navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="color: {{color}}; background: {{background}}; {{displayStyle}}; {{innerPaddingRight}}; {{safeAreaTop}}">
+  <view class="weui-navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="align-items: flex-start;color: {{color}}; background: {{background}}; {{displayStyle}}; {{innerPaddingRight}}; {{safeAreaTop}}">
 
     <!-- 左侧按钮 -->
     <view class='weui-navigation-bar__left' style="{{leftWidth}}">
@@ -49,7 +49,7 @@
         ></view>
       </view>
       <block class="logo" wx:if="{{title}}">
-        <image class="logo-image" src="../../assets/img/logo.png" />
+        <image wx:if="{{showLogo}}" class="logo-image" src="../../assets/img/logo.png" />
         <text>{{title}}</text>
       </block>
       <block wx:else>

@@ -1,0 +1,34 @@
+<!--pages/send/send.wxml-->
+<view class="send-container">
+  <view class="top-container">
+    <navigation-bar bind:back="clearWriteData" title="赠送胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="black" background="#FFF"></navigation-bar>
+  </view>
+  <view class="send-box">
+    <view class="send-info">
+      <view class="send-title">
+        <image src="{{packData.gift ? '../../assets/img/red-pack.png' : '../../assets/img/blue-pack.png' }}" class="send-icon"></image>
+        时间胶囊
+      </view>
+      <view class="send-content">
+        <view>已封装！</view>
+        <view>{{packData.gift ?'右上角转发给好友吧！':'开启之日再见！'}}</view>
+      </view>
+      <view class="open-time">
+        <view class="open-time-box">
+          <image src="{{packData.gift  ? '../../assets/img/clock-red.png':'../../assets/img/clock-blue.png'}}" class="open-time-icon"></image>
+          <view>开启时间</view>
+        </view>
+        <view class="open-time-text">
+          {{openTime}}
+        </view>
+      </view>
+    </view>
+
+  </view>
+  <view class="bottom-view">
+    <view bind:tap="onContinueWrite">
+      + 再写一个
+    </view>
+
+  </view>
+</view>

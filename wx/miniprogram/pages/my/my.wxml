@@ -1,0 +1,40 @@
+<!--pages/my/my.wxml-->
+<view class="my-container">
+  <view class="top-container">
+    <navigation-bar title="我的胶囊" showLeft="{{false}}" back="{{false}}" showLogo="{{false}}" homeButton="{{false}}" color="white" background="#2487FF"></navigation-bar>
+    <view class="search-container">
+      <view class="search-box">
+        <input class="search-input" placeholder="搜索" bindinput="onSearchInput" placeholder-class="search-placeholer"> </input>
+        <image src="../../assets/img/search.svg" class="search-icon" bind:tap="onSearchTap"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class='weui-navigation-bar__left home-back' style="{{leftWidth}}">
+    <view class="home-back-con">
+      <view class="weui-navigation-bar__buttons weui-navigation-bar__buttons_goback">
+        <view bindtap="back" class="weui-navigation-bar__btn_goback_wrapper" hover-class="weui-active" hover-stay-time="100" aria-role="button" aria-label="返回">
+          <view class="weui-navigation-bar__button weui-navigation-bar__btn_goback"></view>
+        </view>
+      </view>
+
+      <view class="weui-navigation-bar__buttons weui-navigation-bar__buttons_home">
+        <view bindtap="home" class="weui-navigation-bar__btn_home_wrapper" hover-class="weui-active" aria-role="button" aria-label="首页">
+          <view class="weui-navigation-bar__button weui-navigation-bar__btn_home"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="container my-container">
+    <pack-item class="capsule" wx:for="{{capsules}}" wx:for-index="idx" wx:key="unique" item="{{item}}" now="{{now}}" />
+    <view wx:if="{{capsules.length==0}}" class="no-data-box">
+      <image src="../../assets/img/no_data.png" class="no-data-image"></image>
+      <view>空空如也</view>
+    </view>
+    <view class="loading" wx:if="{{loading && capsules.length>0}}">
+      <image src="../../assets/img/timepill.gif" class="loading-image"></image>
+      别急，在加载了~
+    </view>
+  </view>
+</view>

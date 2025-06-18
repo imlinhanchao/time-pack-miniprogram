@@ -4,8 +4,9 @@ import { wxlogin } from "./utils/wx";
 App<IAppOption>({
   globalData: {
     apiUrl: `https://time-pack.com/api`,
+    imgUrl: `https://time-pack.com`,
   },
-  onShow() {
+  onShow(){
     wxlogin(this);
-  },
+  }
 })

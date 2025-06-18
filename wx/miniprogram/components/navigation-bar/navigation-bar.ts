@@ -14,6 +14,14 @@ Component({
       type: String,
       value: ''
     },
+    showLeft:{
+      type: Boolean,
+      value: true
+    },
+    showLogo: {
+      type: Boolean,
+      value: true
+    },
     background: {
       type: String,
       value: ''
@@ -63,12 +71,21 @@ Component({
       wx.getSystemInfo({
         success: (res) => {
           const isAndroid = res.platform === 'android'
-          const isDevtools = res.platform === 'devtools'
+          let leftWidthStr = `width: ${rect.width }px; height: ${rect.height}px;margin-left:${res.windowWidth - rect.right}px;`
+          if(!this.data.showLeft){
+            leftWidthStr += 'background-color:#ffffff00 !important;'
+          }
           this.setData({
             ios: !isAndroid,
             innerPaddingRight: `padding-right: ${res.windowWidth - rect.left}px`,
-            leftWidth: `width: ${res.windowWidth - rect.left }px`,
-            safeAreaTop: isDevtools || isAndroid ? `height: calc(var(--height) + ${res.safeArea.top}px); padding-top: ${res.safeArea.top}px` : ``
+            leftWidth: leftWidthStr,
+            safeAreaTop:  `height:  ${rect.top+rect.height}px; padding-top: ${rect.top}px` 
+          })
+        },
+        fail:(err)=>{
+          wx.showToast({
+            title:JSON.stringify(err),
+            icon:'none'
           })
         }
       })
@@ -102,17 +119,20 @@ Component({
       this.triggerEvent('back', { delta: data.delta }, {})
     },
     home() {
-      const data = this.data
-      if (data.delta) {
-        wx.navigateTo({
-          url: '../index/index',
-          delta: data.delta
-        })
-      }
-      wx.navigateTo({
-        url: '../index/index',
-        delta: data.delta
+      wx.reLaunch({
+        url: '../home/home',
       })
+      // const data = this.data
+      // if (data.delta) {
+      //   wx.navigateTo({
+      //     url: '../home/home',
+      //     delta: data.delta
+      //   })
+      // }
+      // wx.navigateTo({
+      //   url: '../home/home',
+      //   delta: data.delta
+      // })
     }
   },
 })

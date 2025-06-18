@@ -3,7 +3,7 @@
   "projectname": "time-pack",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": false
+    "urlCheck": true
   },
-  "libVersion": "3.3.2"
+  "libVersion": "3.8.7"
 }

@@ -1,9 +1,17 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/receive/receive",
+    "pages/send/send",
+    "pages/setInfo/setInfo",
+    "pages/read/read",
+    "pages/write/write",
+    "pages/my/my",
     "pages/index/index",
     "pages/logs/logs",
     "pages/create/create",
     "pages/list/list"
+    
   ],
   "window": {
     "navigationBarTextStyle": "black",

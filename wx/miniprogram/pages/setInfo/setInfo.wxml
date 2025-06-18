@@ -1,0 +1,33 @@
+<!--pages/send/send.wxml-->
+<view class="send-container">
+  <view class="top-container">
+    <navigation-bar title="赠送胶囊" back="{{true}}" showLogo="{{false}}" homeButton="{{true}}" color="black" background="#FFF"></navigation-bar>
+  </view>
+  <view class="send-box">
+    <view class="send-info">
+      <view class="send-title">
+        <image src="{{packData.gift ? '../../assets/img/red-pack.png' : '../../assets/img/blue-pack.png' }}" class="send-icon"></image>
+        时间胶囊
+      </view>
+      <view class="send-content">
+        <view>首次<text style="color:#ff0000">赠送</text>，</view>
+        <view>先设置头像昵称吧~</view>
+        <view class="nick-box">
+          <button class="head-box" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+            <image src="{{ tempAvatar ? imgUrl + tempAvatar :'../../assets/img/head_default.png'}}" style="width: 150rpx;height: 150rpx;"></image>
+          </button>
+          <input model:value="{{tempNick}}" type="nickname" class="nick-text" placeholder="昵称" />
+          <button class="confirm-btn" bind:tap="onUpdateInfo">
+            就这样吧
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-view">
+    <view>
+      不想送了 >
+    </view>
+  </view>
+  <pack-loading  id="loading"></pack-loading>
+</view>
