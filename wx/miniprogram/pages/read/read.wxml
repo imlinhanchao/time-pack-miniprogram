@@ -3,30 +3,14 @@
     <navigation-bar title="时间胶囊" showLeft="{{false}}" back="{{false}}" showLogo="{{false}}" homeButton="{{false}}" color="white" background="#2487FF"></navigation-bar>
     <view class="title">{{packData.title}}</view>
   </view>
-
-  <view class='weui-navigation-bar__left home-back' style="{{leftWidth}}">
-    <view class="home-back-con">
-      <view class="weui-navigation-bar__buttons weui-navigation-bar__buttons_goback">
-        <view bindtap="back" class="weui-navigation-bar__btn_goback_wrapper" hover-class="weui-active" hover-stay-time="100" aria-role="button" aria-label="返回">
-          <view class="weui-navigation-bar__button weui-navigation-bar__btn_goback"></view>
-        </view>
-      </view>
-
-      <view class="weui-navigation-bar__buttons weui-navigation-bar__buttons_home">
-        <view bindtap="home" class="weui-navigation-bar__btn_home_wrapper" hover-class="weui-active" aria-role="button" aria-label="首页">
-          <view class="weui-navigation-bar__button weui-navigation-bar__btn_home"></view>
-        </view>
-      </view>
-    </view>
-  </view>
-
+  <navigation-button></navigation-button>
 
   <view class="container read-container">
     <text class="content"> {{packData.content}}</text>
   </view>
   <view class="bottom-info">
     <view class="user-info">
-      <image class="head-image" src="{{imgUrl + packData.create_avatar}}"></image>
+      <image class="head-image" src="{{imgUrl + packData.create_avatar}}" wx:if="{{packData.create_avatar}}"></image>
       <view class="user-name">
         {{ packData.create_nick }}
         <text class="send-text" wx:if="{{packData.gift && openid != packData.create_user}}">赠送</text>

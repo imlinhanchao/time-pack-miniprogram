@@ -18,21 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(option) {
-    const rect = wx.getMenuButtonBoundingClientRect()
-    wx.getSystemInfo({
-      success: (res) => {
-        this.setData({
-          leftWidth: `width: ${rect.width }px; height: ${rect.height}px;margin-left:${res.windowWidth - rect.right}px;top:${rect.top}px`,
-        })
-      },
-      fail:(err)=>{
-
-      }
-    })
-
-
-
-
     let id = option.id
     this.selectComponent("#loading").show({title:'正在读取'});
     open(id).then(res=>{
@@ -50,16 +35,6 @@ Page({
     })
   },
 
-
-  back(){
-    wx.navigateBack()
-  },
-
-  home(){
-    wx.reLaunch({
-      url: '../home/home',
-    })
-  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
