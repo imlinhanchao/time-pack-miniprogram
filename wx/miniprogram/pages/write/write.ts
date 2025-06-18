@@ -1,6 +1,7 @@
 import { addTime, formatDate } from "../../utils/date";
 const DATE_FORMAT1 = 'YYYY-MM-DD';
 import { create } from "../../api/capsule"
+import { MsgType, wxSubscribe } from "../../utils/wx";
 const app = getApp<IAppOption>();
 // pages/write/write.ts
 Page({
@@ -36,7 +37,7 @@ Page({
     })
   },
 
-  createPack(e: any) {
+  async createPack(e: any) {
     if (!this.data.title) {
       this.showToast('写个标题？')
       return
@@ -52,52 +53,61 @@ Page({
     console.log(app.globalData.userInfo);
 
     if (gift && !app.globalData.userInfo?.nickname) {
+      await this.setUserInfo();
+    }
+    await this.createPackReq(reqData);
+    const msgTypes = [MsgType.open];
+    if (gift && MsgType.receive) msgTypes.push(MsgType.receive);
+    wxSubscribe(msgTypes);
+  },
+
+  setUserInfo(): Promise<void> {
+    return new Promise((resolve) => {
       wx.navigateTo({
         url: `../setInfo/setInfo`,
         events: {
           setInfo: () => {
             // 设置头像成功了
-            this.createPackReq(reqData)
+            resolve()
           }
         }
       })
-      return
-    }
-    this.createPackReq(reqData)
+    })
   },
   
-  createPackReq(data) {
-
-    this.selectComponent("#loading").show({title:'正在封装'});
-    create(data).then(res => {
-
-      this.selectComponent("#loading").hide();
-      let { id, gift, time_out } = res
-      wx.navigateTo({
-        url: `../send/send`,
-        events: {
-          clearData: (res) => {
-            this.setData({
-              dateValue: formatDate(addTime(new Date(), 10, 'year'), DATE_FORMAT1),
-              date: formatDate(addTime(new Date(), 10, 'year')),
-              time: formatDate(new Date(), 'HH:mm'),
-              title: '',
-              content: '',
-              time_out: addTime(new Date(), 10, 'year').getTime(),
-              today: formatDate(new Date(), DATE_FORMAT1),
-            })
+  createPackReq(data: any) {
+    return new Promise((resolve, reject) => {
+      this.selectComponent("#loading").show({title:'正在封装'});
+      create(data).then(res => {
+        this.selectComponent("#loading").hide();
+        let { id, gift, time_out } = res;
+        resolve(id)
+        wx.navigateTo({
+          url: `../send/send`,
+          events: {
+            clearData: () => {
+              this.setData({
+                dateValue: formatDate(addTime(new Date(), 10, 'year'), DATE_FORMAT1),
+                date: formatDate(addTime(new Date(), 10, 'year')),
+                time: formatDate(new Date(), 'HH:mm'),
+                title: '',
+                content: '',
+                time_out: addTime(new Date(), 10, 'year').getTime(),
+                today: formatDate(new Date(), DATE_FORMAT1),
+              })
+            },
           },
-        },
-        success: (res) => {
-          res.eventChannel.emit('acceptSendData', {
-            id, gift, time_out
-          })
-        }
+          success: (res) => {
+            res.eventChannel.emit('acceptSendData', {
+              id, gift, time_out
+            })
+          }
+        })
+      }).catch(err => {
+        reject(err);
+        this.selectComponent("#loading").hide();
+        this.showToast(err.message || "封装失败了T_T~")
       })
-    }).catch(err => {
-
-      this.selectComponent("#loading").hide();
-      this.showToast(err.message || "封装失败了T_T~")
     })
   },
 
