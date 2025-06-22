@@ -31,3 +31,20 @@ export function wxlogin(app: WechatMiniprogram.App.Instance<IAppOption>) {
     })
   })
 }
+
+export enum MsgType {
+  receive = '', // 申请中，待补充
+  open = '1hFdlq3ysKkG6YI-76cZg0PzgSJG6uKdKZDiRfNBz2s',
+}
+
+export function wxSubscribe(msgTypes: MsgType[]) {
+  return wx.requestSubscribeMessage({
+      tmplIds: msgTypes,
+      success (res) { 
+        console.log('wxSubscribe', res);
+      },
+      catch (err: any) {
+        console.log('wxSubscribe Error', err);
+      }
+    })
+}
