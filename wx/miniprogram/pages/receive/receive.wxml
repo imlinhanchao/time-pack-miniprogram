@@ -40,8 +40,8 @@
         <view>{{packData.gift ?'右上角转发给好友吧！':'开启之日再见！'}}</view>
       </view>
       <view class="send-content" wx:else>
-        <view>哎呀！</view>
-        <view>这是一个私有胶囊！</view>
+        <view>来晚了！</view>
+        <view>胶囊已经被领取！</view>
       </view>
       <view class="send-open-time">
         <view class="send-open-time-box" wx:if="{{!showNoPermisson}}">
