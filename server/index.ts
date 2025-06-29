@@ -8,6 +8,7 @@ import { name } from "./package.json";
 import app from "./app";
 import http from "http";
 import config from "./config.json";
+import * as Task from "./lib/task";
 
 /**
  * Get port from environment and store in Express.
@@ -84,4 +85,5 @@ function onListening() {
   const addr = server.address();
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr!.port;
   console.log(`${name}:server Listening on ${bind}`);
+  Task.create(); // 启动定时任务
 }

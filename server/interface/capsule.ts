@@ -210,9 +210,8 @@ class CapsuleApp extends App {
     }
   }
 
-  static async notice(timeout: number, noticeOnly: boolean = true) {
-    if (!noticeOnly) return;
-    timeout = new Date().getTime();
+  static async _notice(timeout: number) {
+    timeout = timeout || new Date().getTime();
 
     const capsules = await Capsule.findAll({
       where: {
