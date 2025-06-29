@@ -2,6 +2,7 @@ import { Op } from "sequelize";
 import AccountApp, { IAccount } from "./account";
 import App from "./app";
 import model from "@/model";
+import WxApi from "@lib/wx";
 const Capsule = model.capsule;
 
 export interface ICapsule {
@@ -206,6 +207,52 @@ class CapsuleApp extends App {
     } catch (err: any) {
       if (err.isdefine) throw err;
       throw this.error.db(err);
+    }
+  }
+
+  static async notice(timeout: number, noticeOnly: boolean = true) {
+    if (!noticeOnly) return;
+    timeout = new Date().getTime();
+
+    const capsules = await Capsule.findAll({
+      where: {
+        time_out: {
+          [Op.lte]: timeout
+        },
+        status: 1,
+        is_notice: false
+      }
+    });
+
+    if (!capsules || capsules.length == 0) return 0;
+
+    const { access_token } = await WxApi.getAccessToken();
+    for (let capsule of capsules) {
+      // 埋藏天数
+      const days = Math.floor((timeout - capsule.time_out) / (1000 * 60 * 60 * 24));
+      const data = {
+        thing1: { value: capsule.title },
+        thing3: { value: days + '天' },
+        time4: { value: new Date(capsule.time_out).toLocaleString() },
+        time6: { value: new Date(capsule.create_time).toLocaleString() },
+      };
+
+      try {
+        const res = await WxApi.sendSubscribeMessage(
+          access_token,
+          capsule.create_user,
+          'pages/read/read.html?id=' + capsule.id,
+          data
+        );
+        if (res.errcode == 0) {
+          capsule.is_notice = true;
+          await capsule.save();
+        }
+      } catch (err: any) {
+        console.error('发送通知失败', err);
+      }
+
+      return capsules.length;
     }
   }
 }

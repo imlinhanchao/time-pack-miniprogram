@@ -41,6 +41,11 @@ const orm = {
     type: db.STRING(256),
     comment: "创建用户头像地址",
   },
+  is_notice: {
+    type: db.BOOLEAN,
+    defaultValue: false,
+    comment: "是否已通知",
+  },
 };
 export const table_name = prefix + "capsule";
 export default Object.assign(
