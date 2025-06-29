@@ -1,4 +1,4 @@
-import { login, refreshToken } from "../api/account";
+import { info, login, refreshToken } from "../api/account";
 
 const app = getApp<IAppOption>();
 
@@ -14,7 +14,11 @@ export function wxlogin(app: WechatMiniprogram.App.Instance<IAppOption>) {
         wx.setStorageSync('user', userInfo)
       } catch (error) {}
     }
-    if (userInfo?.openid) {
+
+    let tokenExpires = false;
+    if (userInfo) await info().catch(() => tokenExpires = true);
+
+    if (!tokenExpires && userInfo?.openid) {
       app.globalData.userInfo = userInfo;
       return resolve(app.globalData.userInfo);
     }
