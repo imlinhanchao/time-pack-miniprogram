@@ -240,7 +240,7 @@ class CapsuleApp extends App {
         const res = await WxApi.sendSubscribeMessage(
           access_token,
           capsule.create_user,
-          'pages/read/read.html?id=' + capsule.id,
+          'pages/read/read?id=' + capsule.id,
           data
         );
         if (res.errcode == 0) {
