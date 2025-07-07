@@ -17,6 +17,7 @@ export interface ICapsule {
   create_user: string;
   create_nick: string;
   create_avatar: string;
+  is_notice?: boolean;
 }
 const __error__ = Object.assign(
   {
@@ -56,6 +57,7 @@ class CapsuleApp extends App {
     data.create_nick = creator.nickname;
     data.create_avatar = creator.avatar;
     data.create_user = creator.openid!;
+    data.is_notice = false;
 
     if (!App.haskeys(data, keys)) {
       throw this.error.param;
