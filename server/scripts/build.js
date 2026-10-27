@@ -18,7 +18,9 @@ if (fs.existsSync(distDir)) {
 // 2. Compile TypeScript
 console.log('⏳ Compiling TypeScript...');
 try {
-  execSync('npx tsc', { cwd: rootDir, stdio: 'inherit' });
+  const tsJsBin = path.resolve(rootDir, 'node_modules/typescript/bin/tsc');
+  const tscCmd = fs.existsSync(tsJsBin) ? `"${process.execPath}" "${tsJsBin}"` : 'npx --no-install tsc';
+  execSync(tscCmd, { cwd: rootDir, stdio: 'inherit' });
   console.log('✔ TypeScript compiled successfully');
 } catch (error) {
   console.error('✖ TypeScript compilation failed');
@@ -46,9 +48,13 @@ if (!fs.existsSync(uploadDir)) {
 // 5. Copy config files if they exist in source directory
 const serverConfig = path.resolve(rootDir, 'config.json');
 const distConfig = path.resolve(distDir, 'config.json');
+let parsedServerConfig = null;
 if (fs.existsSync(serverConfig)) {
   fs.copyFileSync(serverConfig, distConfig);
   console.log('✔ Copied config.json -> dist/config.json');
+  try {
+    parsedServerConfig = JSON.parse(fs.readFileSync(serverConfig, 'utf-8'));
+  } catch (e) {}
 }
 
 const modelConfig = path.resolve(rootDir, 'model/config.json');
@@ -57,6 +63,10 @@ if (fs.existsSync(modelConfig)) {
   fs.mkdirSync(path.dirname(distModelConfig), { recursive: true });
   fs.copyFileSync(modelConfig, distModelConfig);
   console.log('✔ Copied model/config.json -> dist/model/config.json');
+} else if (parsedServerConfig && parsedServerConfig.db) {
+  fs.mkdirSync(path.dirname(distModelConfig), { recursive: true });
+  fs.writeFileSync(distModelConfig, JSON.stringify(parsedServerConfig.db, null, 4));
+  console.log('✔ Generated dist/model/config.json from config.json (db field)');
 }
 
 // 6. Ensure package.json is present in dist

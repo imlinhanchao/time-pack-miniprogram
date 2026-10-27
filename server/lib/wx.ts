@@ -1,5 +1,5 @@
 import axios from "axios";
-import { wx } from "../config.json";
+import { wx } from "../config";
 
 export default class WxApi {
   static async login(code: string) {

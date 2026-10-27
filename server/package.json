@@ -2,6 +2,7 @@
   "name": "time-pack",
   "description": "time-pack",
   "version": "1.0.0",
+  "main": "index.js",
   "private": true,
   "keywords": [],
   "homepage": "https://github.com/imlinhanchao/time-pack-miniprogram",
@@ -50,8 +51,6 @@
     "sequelize": ">=5.3.0",
     "serve-favicon": "^2.5.0",
     "session-file-store": "^1.4.0",
-    "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
@@ -66,6 +65,8 @@
     "@types/node-schedule": "^2.1.7",
     "@types/serve-favicon": "^2.5.7",
     "@types/uuid": "^9.0.7",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   },
   "pnpm": {}

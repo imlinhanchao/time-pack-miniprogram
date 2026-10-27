@@ -1,5 +1,5 @@
 import { BIGINT, Dialect, INTEGER, Sequelize, UUID, UUIDV4 } from "sequelize";
-import config from "./config.json";
+import config from "./config";
 const sequelize = new Sequelize(config.database, config.user, config.password, {
   host: config.host,
   dialect: config.dialect as Dialect,

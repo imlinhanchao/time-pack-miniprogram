@@ -1,5 +1,5 @@
 import * as db from "../db";
-import { prefix } from "../config.json";
+import { prefix } from "../config";
 const orm = {
   user: {
     type: db.STRING(256),

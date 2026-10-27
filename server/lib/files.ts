@@ -1,7 +1,7 @@
 import fs from "fs";
 import axios from "axios";
 import path from "path";
-import { file as filecfg} from "../config.json";
+import { file as filecfg} from "../config";
 import crypto from "crypto";
 
 export default {

@@ -4,21 +4,19 @@
  * Module dependencies.
  */
 
-import fs from "fs";
-import path from "path";
+import config, { findConfigFile } from "./config";
 
-if (!fs.existsSync(path.join(__dirname, "config.json"))) {
+if (!findConfigFile()) {
   console.info(
     "[Info] Please execute `npm run init` to initialization config."
   );
   process.exit(0);
 }
 
-const { name } = require("./package.json");
-const app = require("./app").default;
-const http = require("http");
-const config = require("./config.json");
-const Task = require("./lib/task");
+import { name } from "./package.json";
+import app from "./app";
+import http from "http";
+import * as Task from "./lib/task";
 
 /**
  * Get port from environment and store in Express.

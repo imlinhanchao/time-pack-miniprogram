@@ -24,3 +24,5 @@ tsconfig.tsbuildinfo
 config.json
 model/config.json
 public/upload/*
+*.tar.gz
+.pnpm-store

@@ -12,5 +12,15 @@
     "upload": "/public/upload/",
     "fileurl": "/upload/",
     "maxSize": 2
+  },
+  "db": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "time_pack",
+    "dialect": "mysql",
+    "prefix": "time_",
+    "port": 3306,
+    "logging": false
   }
 }

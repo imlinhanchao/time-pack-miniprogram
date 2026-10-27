@@ -3,7 +3,7 @@ import fs from "fs";
 import App from "./app";
 import files from "../lib/files";
 
-import { file as filecfg} from "../config.json";
+import { file as filecfg} from "../config";
 import { Request } from "express";
 
 const __error__: any = Object.assign({}, App.error);
