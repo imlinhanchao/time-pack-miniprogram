@@ -1,8 +1,8 @@
 import { Op } from "sequelize";
 import AccountApp, { IAccount } from "./account";
 import App from "./app";
-import model from "@/model";
-import WxApi from "@lib/wx";
+import model from "../model";
+import WxApi from "../lib/wx";
 const Capsule = model.capsule;
 
 export interface ICapsule {

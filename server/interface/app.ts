@@ -1,6 +1,6 @@
-import * as db from "@model/db";
-import { Op } from "@model/db";
-import { ModelExt } from "@model/index";
+import * as db from "../model/db";
+import { Op } from "../model/db";
+import { ModelExt } from "../model/index";
 
 export class AppError extends Error {
   state: number;

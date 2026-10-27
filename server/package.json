@@ -20,8 +20,15 @@
   },
   "scripts": {
     "init": "node -r tsconfig-paths/register -r ts-node/register ./scripts/init.ts",
-    "start": "node -r tsconfig-paths/register -r ts-node/register ./index.ts",
-    "initdb": "node -r tsconfig-paths/register -r ts-node/register ./scripts/initdb.ts"
+    "initdb": "node -r tsconfig-paths/register -r ts-node/register ./scripts/initdb.ts",
+    "init:prod": "node dist/scripts/init.js",
+    "initdb:prod": "node dist/scripts/initdb.js",
+    "dev": "node -r tsconfig-paths/register -r ts-node/register ./index.ts",
+    "clean": "node -e \"const fs=require('fs');fs.rmSync('dist',{recursive:true,force:true})\"",
+    "build": "node ./scripts/build.js",
+    "start": "node dist/index.js",
+    "start:dev": "node -r tsconfig-paths/register -r ts-node/register ./index.ts",
+    "start:prod": "node dist/index.js"
   },
   "dependencies": {
     "auto-loader": "^0.2.0",
@@ -58,7 +65,8 @@
     "@types/node": "^20.11.3",
     "@types/node-schedule": "^2.1.7",
     "@types/serve-favicon": "^2.5.7",
-    "@types/uuid": "^9.0.7"
+    "@types/uuid": "^9.0.7",
+    "typescript": "^5.3.3"
   },
   "pnpm": {}
 }

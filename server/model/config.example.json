@@ -1,0 +1,10 @@
+{
+  "host": "localhost",
+  "user": "root",
+  "password": "",
+  "database": "time_pack",
+  "dialect": "mysql",
+  "prefix": "time_",
+  "port": 3306,
+  "logging": false
+}

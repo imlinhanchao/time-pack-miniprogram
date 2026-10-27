@@ -2,11 +2,11 @@ import { Request } from 'express';
 import path from "path";
 import fs from "fs";
 import crypto from "crypto";
-import model from "@/model";
+import model from "../model";
 import App from "./app";
-import config from "@/config.json";
+import config from "../config.json";
 import jwt from "jsonwebtoken";
-import wxapi from "@/lib/wx";
+import wxapi from "../lib/wx";
 const Account = model.account;
 
 const __salt = config.salt;

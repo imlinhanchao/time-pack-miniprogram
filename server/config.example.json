@@ -1,0 +1,16 @@
+{
+  "name": "time-pack",
+  "port": 3000,
+  "accessSecret": "example_access_secret_key_please_change",
+  "refreshSecret": "example_refresh_secret_key_please_change",
+  "salt": "example_salt_key_please_change",
+  "wx": {
+    "appid": "your_wechat_miniprogram_appid",
+    "secret": "your_wechat_miniprogram_secret"
+  },
+  "file": {
+    "upload": "/public/upload/",
+    "fileurl": "/upload/",
+    "maxSize": 2
+  }
+}
